@@ -219,13 +219,13 @@
           href:                         /pages/public/manuals/videojs/wistia_api/
           icon:                         video
 
+    # --------------------------------------------------------------------------
+    # Modules
+    #
     - title:                            Modules
       icon:                             alpha-j-box
       dropdown:
 
-        - title:                        lightGallery
-          href:                         /pages/public/manuals/videojs/lightgallery_api/
-          icon:                         flashlight
         - title:                        Speak2Me
           href:                         /pages/public/modules/speak2me/
           icon:                         speaker
@@ -238,36 +238,30 @@
         - title:                        Cookie Consent
           href:                         /pages/public/manuals/modules/cookie_consent/
           icon:                         cookie
-        - title:                        Galleries
-          href:                         /pages/public/manuals/modules/gallery/
-          icon:                         view-dashboard-variant
         - title:                        Lightbox
           href:                         /pages/public/manuals/modules/lightbox/
           icon:                         flashlight
+        - title:                        lightGallery
+          href:                         /pages/public/manuals/modules/lightgallery/
+          icon:                         flashlight
         - title:                        Logger
           href:                         /pages/public/manuals/modules/logger/
-          icon:                         file-document-edit-outline
+          icon:                         math-log
         - title:                        Master Slider
           href:                         /pages/public/manuals/modules/masterslider/
           icon:                         gesture-swipe
         - title:                        Mobile Menu
-          href:                         /pages/public/manuals/mmenu/
+          href:                         /pages/public/manuals/modules/mmenu/
           icon:                         menu
         - title:                        MSDropdown
-          href:                         /pages/public/manuals/msdropdown/
+          href:                         /pages/public/manuals/modules/msdropdown/
           icon:                         form-dropdown
         - title:                        Navigator
           href:                         /pages/public/manuals/modules/navigator/
           icon:                         near-me
         - title:                        Range Slider
           href:                         /pages/public/manuals/modules/rangeslider/
-          icon:                         abacus
-        - title:                        Themer
-          href:                         /pages/public/manuals/modules/themer/
-          icon:                         theme-light-dark
-        - title:                        Toccer
-          href:                         /pages/public/manuals/modules/toccer/
-          icon:                         wrap
+          icon:                         distribute-vertical-center
         - title:                        iFramer
           href:                         /pages/public/manuals/modules/iframer/
           icon:                         window-open-variant
