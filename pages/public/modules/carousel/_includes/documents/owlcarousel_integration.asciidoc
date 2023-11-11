@@ -1,0 +1,258 @@
+[role="mt-5"]
+== J1 Carousel
+
+J1 Theme has fully integrated Owl Carousel V1. For the typical usage of a
+slide show with your content *no* manual configuration, *no* carousel
+initialization and *no* HTML code is needed. J1 Owl Carousel instances are
+created *automatically* based on a single *configuration* step with the Owl
+Carousel YAML file `j1_carousel_mgr.yml`.
+
+[role="mt-4"]
+=== Module sources
+
+The sources for J1 OWL Carousel are stored within the *asset path*
+of J1Template. You'll find all necessary data files under
+`/assets/themes/j1/owl_carousel_v1`:
+
+.Structure of the J1 OWL Carousel application tree (base components)
+----
+
+  ├───css
+  │   │   owl.carousel.css
+  │   │   owl.carousel.min.css
+  │   │   owl.transitions.css
+  │   │   owl.transitions.min.css
+  │   │
+  │   └───themes
+  │           j1_template.css
+  │           j1_samples.css
+  ├───images
+  │       ajax-loader.gif
+  │       grabbing.jpg
+  │       owl.video.play.jpg
+  └───js
+          owl.carousel.js
+          owl.carousel.min.js
+
+----
+
+[role="mt-4"]
+=== Initialization
+
+As for all modules with J1 Theme, the initialization of an in-page application
+is done by a *3-step-sequence*: Loading the CSS and JS code portions followed
+by a final setup phase to make the module ready to use (*J1 Initializer*).
+
+==== CSS load
+
+The first initialization step is to load the CSS data needed. Beside the base
+CSS styles provided by `owl.carousel.css` and the CSS transition definitions
+`owl.transitions.css`, custom styles are loaded for J1 Theme
+by `j1_europe.css`
+
+[NOTE]
+====
+Loading CSS data is *automatically* done by J1 Theme with the `layout BASE`
+for *all* content pages. The layout `BASE` runs the Liquid procedure
+`base_loader` on the `HEAD` section (region *head*) to load CSS data files
+based on the definitions specified with the *CSS loader* file
+`/_includes/themes/j1/pages/css_loader.html`.
+====
+
+[start=1]
+
+[source, html]
+----
+  <!-- Styles for CAROUSEL Manager (OwlSlider V1) -->
+  {% if page.owl_carousel_v1 and page.layout != 'app' and j1_modules.j1_carousel_mgr.enabled %}
+  <link rel="stylesheet" href="{{ asset_path }}/owl_carousel_v1/css/owl.carousel.css" />
+  <link rel="stylesheet" href="{{ asset_path }}/owl_carousel_v1/css/owl.transitions.css" />
+  <!-- Custom CAROUSEL Styles for J1 Theme -->
+  <link rel="stylesheet" href="{{ asset_path }}/owl_carousel_v1/css/themes/j1_template.css" />
+  {% endif %}
+----
+
+==== JS load
+
+The second phase covers the load of the Javascript portion. J1 Owl Carousel use
+a single library file `owl.carousel.js` for development or `owl.carousel.js` for
+production use.
+
+[NOTE]
+====
+Loading Javascript libraries is *automatically* done by J1 Theme with the
+`layout BASE` for *all* content pages. The layout `BASE` runs the Liquid procedure
+`base_loader` on the `HTML` section (region *html-footer*) to load JS data files
+based on the definitions specified with the *JS Loader* file
+`/_includes/themes/j1/pages/js_loader.html`.
+====
+
+[start=2]
+. The Javascript portion of J1 Owl Carousel is included by the `JS loader`
+  component at the bottom of a page, before the closing `</HTML>` tag:
+
+.Include the Javascript
+[source, html]
+----
+  <!-- JS components for J1 CAROUSEL Manager (Owl Carousel V1) -->
+  {% if page.owl_carousel_v1 and page.layout != 'app' and j1_modules.j1_carousel_mgr.enabled %}
+  <!-- Enable JS components for Owl Carousel V1 -->
+  <script src="{{ asset_path }}/owl_carousel_v1/js/owl.carousel.js"></script>
+  {% endif %}
+----
+
+J1 Owl Carousel can be accessed and|or modified dynamically at runtime. Each
+carousel defined, an instance variable is declared (by it's `id`) to access an
+carousel object later anywhere within your content. For more details see chapter
+<<data-methods,Data methods>> later with this manual.
+
+
+.Initialize  Carousel instance variables
+[source, html]
+----
+<!-- Setup GLOBAL JS variables for J1 modules -->
+  <script type="text/javascript">
+  ...
+  ...
+  {% if page.owl_carousel_v1 and page.layout != 'app' and j1_modules.j1_carousel_mgr.enabled %}
+<!-- Setup instance variables for J1 CAROUSEL Manager (Owl Carousel V1) -->
+    {% assign config = site.data.modules.j1_carousel_mgr %}
+
+    {% for item in config.carousel %}
+    {% if item.show.enabled %}
+      var {{item.show.id}};
+    {% endif %}
+    {% endfor %}
+
+  {% assign config = nil %}
+  {% endif %}
+  ...
+  ...
+  </script>
+----
+
+==== JS initialization
+
+Initializing jQuery based Javascript applications is done by J1 Theme using
+so-called *Initializers*. An J1 *Initializer* is a simple *jQuery wrapper*
+around an application to make all configurable options, given with the modules
+*YAML file*, available and standardize how a module is being setup.
+
+Loading and running J1 Initializers are *automatically* done by J1 Theme by
+the `layout BASE` for *all* content pages. The layout `BASE` runs the Liquid
+procedure `base_loader` on the `HTML` section (region *html-footer*) to load
+the application init file based on the definitions specified by the
+*JS Initializer* file `/_includes/themes/j1/pages/js_initializer.html`.
+
+[NOTE]
+====
+Every J1 Initializer offers (at least) one method: `init`. All J1 modules are
+initialized by calling `_J1ApplicationName_.init()` on the `document-ready`
+event where _J1ApplicationName_ is the name of the respective application
+(e.g. `J1OwlCarouselMgr` for the *J1 Owl Gallery module*. Initializers are stored
+under `/assets/themes/j1/j1/js\initializers` for all modules available with
+J1 Theme.
+====
+
+[start=3]
+. Finally, J1 Owl Carousel library is being initialized by the `JS Initializer`
+  component on the `document-ready` event.
+
+.Initialize the Javascript portion of Lightbox
+[source, html]
+----
+<!-- ++++++++++++++ -->
+<!-- Load J1 Initializers -->
+<!-- ++++++++++++++++++++ -->
+   ...
+   ...
+  {% if page.owl_carousel_v1 and page.layout != 'app' and j1_modules.j1_carousel_mgr.enabled %}
+<!-- Enable Initializer for J1 CAROUSEL Manager (OwlSlider V1) -->
+  <script type="text/javascript"
+     src="{{ asset_path }}/{{site.template.name}}/js/initializers/j1_owl_carousel_v1.js">
+  </script>
+  {% endif %}
+   ...
+   ...
+<!-- Run J1 Initializers on DocumentReady Event -->
+<!-- ++++++++++++++++++++++++++++++++++++++++++ -->
+  <script type="text/javascript">
+  $(document).ready(function() {
+   ...
+   ...
+<!-- J1 CAROUSEL Manager (Owl Carousel V1) -->
+    {% if page.owl_carousel_v1 and page.layout != 'app' and j1_modules.j1_carousel_mgr.enabled %}
+<!-- Initialize the J1 CAROUSEL Manager (Owl Carousel V1) -->
+    J1OwlCarouselMgr.init();
+    {% endif %}
+    ...
+    ...
+  });
+  </script>
+----
+
+[role="mt-4"]
+=== Configuration
+
+The *default values* used for the initialization are taken from the module.
+
+==== YAML Data File
+
+All modules provided by the J1Template are *enabled* by default on
+*module level*. As the carousel module, like other modules, is *not* used
+on each and every page, the module has to be *switched-on* on *page level*
+by enabling the library with the *front matter* by setting `owl_carousel_v1`
+to `true`.
+
+[source, yml]
+----
+---
+title:                  CAROUSEL Manager
+tagline:                User Guide
+description:            J1 CAROUSEL Manager
+description:            J1 CAROUSEL Manager
+...
+owl_carousel_v1:        true
+lightbox:               true
+...
+----
+
+[NOTE]
+====
+The `Owl Carousel` module can be enabled to use `J1 Lightbox` as a helper to
+enlarge images of a slideshow. By default, `J1 Lightbox` is *enabled* and
+initialized *automatically*. To use J1 Lightbox with J1 OWL Carousel, add
+`lightbox: true` to the `front matter` of the content page.
+====
+
+[role="mt-4"]
+=== Customization
+
+lorem:sentences[5]
+
+==== Set slides (window) height
+
+The slides aren’t actually 100% height – it’s just based on the proportions
+of the images used. Change the proportions of the window and you’ll see the
+slider doesn’t adhere to the dimensions.
+
+Your best bet for 100% height slides is using height: 100vh; on the Owl’s
+slide class (.owl-item). That way, they’ll alway match the window size.
+
+[source, css]
+----
+.owl-carousel .owl-item {
+    float: left;
+    height: 80vh; /* limit height of a slide */
+}
+----
+
+or
+
+[source, css]
+----
+.owl-carousel .owl-item {
+    float: left;
+    height: 500px;
+}
+----

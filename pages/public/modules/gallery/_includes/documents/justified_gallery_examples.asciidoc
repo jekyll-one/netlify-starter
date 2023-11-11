@@ -1,0 +1,30 @@
+== Gallery examples
+
+Stet clita kasd, no sea takimata sanctus est Lorem ipsum dolor sit amet. 
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy 
+eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+voluptua.
+
+=== Image Gallery and Lightbox2
+
+Sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
+amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt 
+ut labore et dolore magna aliquyam erat, sed diam
+
+include::121_justified_gallery_example.lightbox2.asciidoc[]
+
+=== Image Gallery and LightGallery
+
+Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+et dolore magna aliquyam erat, sed diam
+
+include::122_justified_gallery_example.lightgallery.asciidoc[]
+
+
+
+
+            
+
+
+

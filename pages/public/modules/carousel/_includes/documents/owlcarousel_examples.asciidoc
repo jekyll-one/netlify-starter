@@ -1,0 +1,77 @@
+[role="mt-5"]
+== Carousel Examples
+
+*J1 Carousel* is based on *OWL Carousel V1* in the latest (and unfortuneatly
+last) version of 1.3.3. OWL Carousel is a clean and neat jQuery slider plugin
+for creating fully responsive and touch-enabled carousel sliders.
+
+NOTE: OWL Carousel V1 is *not* longer available on the Internet; for unknown
+reason. Anyway, J1 Theme is using this version of *OWL Carousel* as a
+build-in carousel module because the software does an excellent job, is based
+on a MIT license with no issues using them for private and business use.
+And offers a lot of great features!
+
+[role="mt-4"]
+=== Simple Text Carousel
+
+A slider or carousel typically is used for displaying images but the
+implementation for J1 Theme support a lot more *sources* to be displayed
+as a slide show: simple *text* for example.
+
+carousel::demo_text_carousel[role="mb-3"]
+
+[role="mt-4"]
+=== Parallax Text Carousel
+
+A more *eye-minded* type of a text show is a *parallax* text slider. If you
+want to place emphasis on you personal statements focussing the meaning, this
+type of a slide show may be interesting. Image based slide shows may draw off
+the readers attention from the text, therefor a *pure text based* presentation
+may the better choice.
+
+.Parallax Carousel Example
+carousel::demo_text_carousel_parallax[role="mb-3"]
+
+Parallax text shows are can be placed as banners on a page. A lot of different
+animations can be used. Internally, J1 Theme is using some of the really
+great CSS styles offered by _annimate.css_.
+
+[role="mt-4"]
+=== Simple Image Carousel
+
+Carousels are mostly used for pictures data to animate the images as series.
+Find with the following some examples how to use a carousel for your image
+data.
+
+A simple image show is useful for example as an animated (or not animated)
+banner presenting interesting things of your site or the products offered.
+
+.Simple Image Carousel
+carousel::demo_simple[role="mb-3"]
+
+[role="mt-4"]
+=== Carousel + Caption + Lightbox
+
+Carousels can be used for a quite compact form of image galleries. This example
+show some pictures having individual caption text *and* support a lightbox to
+enlarge images full size. For the example below, a quite simple lightbox
+is used: *Lightbox V2*; or short: *lightbox*.
+
+.Nice cats
+carousel::demo_cats[role="mb-3"]
+
+The J1 module *lightbox* is a simple Lightbox but offers a bunch of interesting
+features for displaying images. For example, lightbox can display all images
+(of a carousel) as a *group*. If one picture is opened in the lightbox, all
+the other can browsed as well.
+
+[role="mt-4"]
+=== One Slide Carousel + Lightbox
+
+The build-in Carousel *carousel* supports multiple *and* single image shows.
+Here you find an example of an single image slide show with *controls* enabled
+to browse all images back and forth. An indicator below the slider shows how
+many images the show contains.
+
+.Single Slide Carousel and a Lightbox
+carousel::demo_oneslide[role="mb-3"]

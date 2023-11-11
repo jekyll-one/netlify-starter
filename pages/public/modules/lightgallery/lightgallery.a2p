@@ -1,0 +1,95 @@
+// -----------------------------------------------------------------------------
+// ~/document_base_folder:              book
+// Master Document PDF conversion:      book.a2p
+//
+// Product/Info:
+// https://jekyll.one
+//
+// Copyright (C) 2023, 2024 Juergen Adams
+//
+// J1 Template is licensed under the MIT License.
+// For details, see https://jekyll.one
+// -----------------------------------------------------------------------------
+
+// Set global page attributes
+// -----------------------------------------------------------------------------
+:doctype:                               book
+:source-highlighter:                    rouge
+:icons:                                 font
+:toc-enabled:
+//:index-enabled:
+
+// Set global resource folders
+// -----------------------------------------------------------------------------
+:imagesdir:                             ../../../../../assets/images/
+:pdf-themesdir:                         ../../../../../_data/asciidoc2pdf/themes
+:pdf-fontsdir:                          ../../../../../_data/asciidoc2pdf/fonts
+//:pdf-stylesdir:                       ../../../../../_data/asciidoc2pdf/styles
+
+// Initialize entry document environmental attributes
+// -----------------------------------------------------------------------------
+:global_includedir:                     ../../../../../_includes
+:includedir:                            _includes
+:documentdir:                           {includedir}/documents
+:tabledir:                              {includedir}/tables
+
+// Load tag, url and data attributes
+// -----------------------------------------------------------------------------
+include::{global_includedir}/attributes.asciidoc[tag=tags]
+include::{global_includedir}/attributes.asciidoc[tag=urls]
+include::{global_includedir}/attributes.asciidoc[tag=data]
+
+include::{includedir}/attributes.asciidoc[tag=tags]
+include::{includedir}/attributes.asciidoc[tag=urls]
+include::{includedir}/attributes.asciidoc[tag=data]
+
+// Set local page attributes
+// -----------------------------------------------------------------------------
+:allow-uri-read:
+:pdf-theme:                             j1
+
+// MAIN
+// =============================================================================
+
+// Document Header
+// -----------------------------------------------------------------------------
+= lightGallery Module for J1 Template
+
+ifdef::toc-enabled[]
+:toc:                                   left
+:toclevels:                             4
+endif::[]
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.Preface
+
+[.lead]
+The lightGallery module is a fast, modular and responsive
+jQuery Plugin to create simple but beautiful looking, featured
+image and video galleries.
+
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+
+// Include Introduction
+// -----------------------------------------------------------------------------
+
+
+// Include Sublevel Entry Documents
+// -----------------------------------------------------------------------------
+
+include::{documentdir}/lightgallery_integration.asciidoc[]
+
+include::{documentdir}/lightgallery_library.asciidoc[]
+
+
+// Document Index
+// -----------------------------------------------------------------------------
+ifdef::index-enabled[]
+[index]
+= Index
+endif::[]

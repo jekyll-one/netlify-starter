@@ -1,0 +1,58 @@
+Accusam et justo duo dolores et ea rebum. Stet clita kasd
+gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
+ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+
+++++
+  <div class="row no-gutters mt-3">
+    <div id="jg_live_demo"></div>
+  </div>
+++++
+
+At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
+gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
+ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+
+[source, html]
+----
+  <div id="j1_basic_gallery_lg" class="mb-4">
+    <a href="/assets/images/gallery/images/justified_gallery/24096687789_c37d45712f_b.jpg">
+      <img src="/assets/images/gallery/images/justified_gallery/24096687789_c37d45712f_b.jpg"
+           alt="Peace of mind" />
+    </a>
+  ...
+    <a href="/assets/images/gallery/images/justified_gallery/13824674674_ca1e482394_b.jpg">
+      <img src="/assets/images/gallery/images/justified_gallery/13824674674_ca1e482394_b.jpg"
+           alt="Deep sea" />
+    </a>
+  </div>
+  ...
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var gallery = $('#j1_basic_gallery_lg');
+      var lightGalleryConf = {
+        thumbnail:    true
+      };
+
+      var justifiedGalleryConf = {
+        rowHeight:            120,
+        maxRowHeight:         false,
+        lastRow:              'nojustify',
+        captions:             true,
+        margins:              1,
+        border:               -1,
+        randomize:            false,
+        waitThumbnailsLoad:   false,
+        refreshTime:          250,
+        refreshSensitivity:   0,
+        cssAnimation:         false
+      };
+
+      $("#j1_basic_gallery_lg").justifiedGallery( justifiedGalleryConf ).on('jg.complete',
+      function() {
+        gallery.lightGallery( lightGalleryConf );
+      });
+    });
+  </script>
+----

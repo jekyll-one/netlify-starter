@@ -1,0 +1,87 @@
+== J1 Integration
+
+The *configuration* file of the JustifiedGallery module is called `j1_modules.yml`.
+It  includes the *default values* used for the initialization.
+
+[source, yml]
+----
+enabled:                      true
+thumbnailPath:
+rowHeight:                    120
+maxRowHeight:                 false
+...
+----
+
+=== Module sources
+
+The sources for J1 JustifiedGallery are stored within the *asset path*
+of J1Template. You'll find all necessary data files under
+`/assets/themes/j1/justified_gallery`:
+
+.Structure of the J1 JustifiedGallery application tree (base components)
+----
+
+├── css
+│   ├── lightbox.css
+│   └── lightbox.min.css
+├── images
+│   ├── close.jpg
+│   ├── loading.gif
+│   ├── next.jpg
+│   └── prev.jpg
+└── js
+    ├── lightbox.js
+    ├── lightbox.min.js
+    ├── lightbox.min.map
+    ├── lightbox-plus-jquery.js
+    ├── lightbox-plus-jquery.min.js
+    └── lightbox-plus-jquery.min.map
+
+----
+
+=== Configuration
+
+The *default values* used for the initialization are taken from the module.
+
+==== YAML Data File
+
+The *configuration* file of the module is called `j1_justified_gallery.yml`.
+It  includes the *default values* used for the initialization.
+
+[source, yml]
+----
+enabled:                      true
+thumbnailPath:
+rowHeight:                    120
+maxRowHeight:                 false
+sizeRangeSuffixes:
+  lt100:                      _t
+  lt240:                      _m
+  lt320:                      _n
+  lt500:
+  lt640:                      _z
+  lt1024:                     _b
+thumbnailPath:
+lastRow:                      nojustify
+margins:                      1
+border:                       -1
+waitThumbnailsLoad:           true
+randomize:                    false
+filter:                       false
+sort:                         false
+selector:                     'a, div:not(.spinner)'
+extension:                    '/\.[^.\\/]+$/'
+refreshTime:                  200
+refreshSensitivity:           0
+rel:
+target:
+justifyThreshold:             0.90
+cssAnimation:                 true
+imagesAnimationDuration:      500
+captions:                     true
+captionSettings:
+  animationDuration:          500
+  visibleOpacity:             0.7
+  nonVisibleOpacity:          0.0
+                   true                  true
+----

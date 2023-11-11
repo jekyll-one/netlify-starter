@@ -1,0 +1,101 @@
+
+== Library Features
+
+A common problem, for people who create sites, is to create an elegant image
+gallery that manages the various sizes and aspect ratio of images. Flickr and
+Google+ manage this situation in an excellent way, the purpose of this plugin
+is to give you the power of these solutions, with a new fast algorithm.
+
+=== Initialization
+
+The first step of initialization is to load the CSS data.
+
+==== CSS load
+
+[start=1]
+. The CSS data for Lightbox is included by the `CSS loader` component
+  of J1Template at the top of every page within the `<HEAD>` section:
+
+.Include the CSS
+[source, html]
+----
+<!-- Styles for J1 JustifiedGallery -->
+<link rel="stylesheet" href="/assets/themes/j1/justified_gallery/css/justifiedGallery.min.css">
+----
+
+==== JS load
+
+As a second step the JavaScript gets loaded. The plugin only needs JQuery.
+Then you have only to include the JS portion of Justified  Gallery's files
+as the following:
+
+[start=2]
+. The Javascript portion of Lightbox is included by the `JS loader`
+  component at the bottom of a page, before the closing `</HTML>` tag:
+
+.Include the Javascript
+[source, html]
+----
+<!-- JS components for J1 JustifiedGallery -->
+<script src="/assets/themes/j1/justified_gallery/js/justifiedGallery.min.js"></script>
+----
+
+==== HTML Markup
+
+Justified Gallery accepts a standard format for a gallery: a series of links
+with a thumbnail inside, where each link leads to the original image.
+
+[source, html]
+----
+<div id="my-gallery" >
+  <a href="path/to/myimage1_original.jpg">
+    <img alt="Title 1" src="path/to/myimage1_thumbnail.jpg"/>
+  </a>
+  <a href="path/to/myimage2_original.jpg">
+    <img alt="Title 2" src="path/to/myimage2_thumbnail.jpg"/>
+  </a>
+  <!-- other images... -->
+</div>
+----
+
+==== JS initialization
+
+Now, you only need to call the plugin that will justify all the images,
+with the default options.
+
+[source, js]
+----
+$("#my-gallery").JustifiedGallery();
+----
+
+=== Options
+
+lorem:sentences[5]
+
+include::../tables/library_options.asciidoc[]
+
+=== Callbacks
+
+lorem:sentences[5]
+
+include::../tables/library_callbacks.asciidoc[]
+
+.Example for callback `jg.complete`
+[source, js]
+----
+$('#gallery_id').justifiedGallery().on('jg.complete', function (e) {
+  alert('on complete');
+});
+----
+
+=== Commands
+
+lorem:sentences[5]
+
+include::../tables/library_commands.asciidoc[]
+
+.Example for command `norewind`
+[source, js]
+----
+$('#gallery_id').justifiedGallery('norewind');
+----

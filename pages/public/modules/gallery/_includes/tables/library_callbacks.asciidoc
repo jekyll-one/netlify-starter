@@ -1,0 +1,16 @@
+.API Callbacks
+[cols="4a,8a", options="header", role="table-responsive rtable"]
+|===
+|Callback |Description
+
+|`jg.complete`
+|Fired when the algorithm finished to create the gallery
+layout.
+
+|`jg.resize`
+|Fired when the algorithm finished to resize the gallery.
+
+|`jg.rowflush`
+|Fired when the a new row is ready.
+
+|===

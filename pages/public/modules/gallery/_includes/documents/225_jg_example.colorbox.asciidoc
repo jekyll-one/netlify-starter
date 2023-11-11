@@ -1,0 +1,50 @@
+At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
+gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
+ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+
+++++
+  <div class="row no-gutters mt-3">
+    <div id="jg_demo_3"></div>
+  </div>
+++++
+
+At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
+gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
+ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+
+[source, html]
+----
+  <div id="j1_basic_gallery_cb">
+    <a href="/assets/images/gallery/images/justified_gallery/24096687789_c37d45712f_b.jpg">
+      <img alt="Peace of mind" src="/assets/images/gallery/images/justified_gallery/24096687789_c37d45712f_m.jpg"/>
+    </a>
+  ...
+    <a href="/assets/images/gallery/images/justified_gallery/13824674674_ca1e482394_b.jpg">
+      <img alt="Deep sea" src="/assets/images/gallery/images/justified_gallery/13824674674_ca1e482394_m.jpg"/>
+    </a>
+  </div>
+   ...
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var justifiedGalleryConf = {
+        rowHeight:            120,
+        maxRowHeight:         false,
+        lastRow:              'nojustify',
+      };
+
+      var colorboxConf = {
+        maxWidth :            '80%',
+        maxHeight :           '80%',
+        opacity :             0.8,
+        transition :          'elastic',
+        current :             ''
+      };
+
+      $("#j1_basic_gallery_cb").justifiedGallery( justifiedGalleryConf ).on('jg.complete', function () {
+        $(this).find('a').colorbox( colorboxConf );
+      });
+    });
+  </script>
+----

@@ -1,0 +1,194 @@
+
+.API options
+[cols="3a,1a,4a,4a", options="header", width="100%", role="rtable mt-4"]
+|===
+|Parameter |Type |Default |Description
+
+|`rowHeight`
+|boolean
+|`120`
+|The preferred height of rows in pixel.
+
+|`maxRowHeight`
+|boolean
+|`false`
+|This option could be a false or negative value
+to keep it disabled. Could be a number (e.g `200`) which specifies the
+maximum row height in pixel. Alternatively, a string which specifies a
+percentage (e.g. "200%" means that the row height can't exceed
+`2 * rowHeight`). Note that with this option can crop the images if they
+need to be higher to be justified.
+
+|`sizeRangeSuffixes`
+|hash
+|`{}`
+| Describes the suffix for each size range. By default other thumbnails
+are not searched. +
+
+To agree with the
+http://www.flickr.com/services/api/misc.urls.html[Flickr's suffixes] you
+should change it in the following way:
+
+`{'lt100':'&#x5F;t', 'lt240':'&#x5F;m', 'lt320':'&#x5F;n',
+  'lt500':'',   'lt640':'&#x5F;z', 'lt1024':'&#x5F;b'}`
+
+The keys could be specified also as numbers (e.g.
+`{512:'&#x5F;small',                     1024:'&#x5F;big'}` to specify the
+'&#x5F;small' suffix for images which are less than 512px on the longest
+side, and '&#x5F;big' for the bigger ones).
+
+|`thumbnailPath`
+|string
+|`undefined`
+| To configure a custom thumbnail selector rather than using
+`sizeRangeSuffixes`, to have more flexibility in some particular
+situations. The function will called giving the following arguments: the
+current path of the image, the width and the height of the image to show
+(after it has been resized), and the image element which can be used to
+get further information.
+
+For example, to select the correct thumbnail changing only a suffix of
+the current filename (like we can done using `sizeRangeSuffixes`)
+
+[source, js]
+----
+$("#myGallery").justifiedGallery({
+  thumbnailPath: function (currentPath, width, height, image) {
+    if (Math.max(width, height) < 250) {
+      return currentPath.replace(/(.*)(&#x5F;[a-z]+)(\..*)/, "$1&#x5F;small$2");
+    } else {
+      return currentPath.replace(/(.*)(&#x5F;[a-z]+)(\..*)/, "$1&#x5F;medium$2");
+    }
+  }
+});
+----
+
+Remember that if this option is defined, `sizeRangeSuffixes` is not
+considered.
+
+|`lastRow`
+|string
+|`nojustify`
+|Decide to justify the last row (using
+`justify`) or not (using `nojustify), or to hide the row if it
+can't be justified (using `hide`). By default, using `nojustify`,
+the last row images are aligned to the left, but they can be also
+aligned to the center (using `center`) or to the right (using
+`right`).
+
+|`captions`
+|boolean
+|`true`
+|Decide if you want to show the caption or not, that
+appears when your mouse is over the image.
+
+|`margins`
+|integer
+|`1`
+|Decide the margins between the images
+
+|`border`
+|integer
+|`-1`
+|Decide the border size of the gallery. With a negative
+value the border will be the same as the margins.
+
+|`waitThumbnailsLoad`
+|boolean
+|`true`
+|In presence of width and height
+attributes in thumbnails, the layout is immediately built, and the
+thumbnails will appear randomly while they are loaded.
+
+|`randomize`
+|boolean
+|`false`
+|Automatically randomize or not the order of photos.
+
+|`filter`
+|boolean
+|`false`
+| Can be:
+* `false`: for a disabled filter.
+* a string: an entry is kept if `entry.is(filter string)` returns `true`
+(see jQuery's `.is()` function for further information).
+* a function: invoked with arguments (entry, index, array). Return
+`true` to keep the entry, `false` otherwise. see
+`Array.prototype.filter` for further information.
+
+|`sort`
+|boolean
+|`false`
+| Can be * `false` to do not sort.
+* a function to sort them using the function as comparator (see
+`Array.prototype.sort()`).
+
+|`selector`
+|string
+|`'a, div:not(.spinner)'`
+|Used to determines which are the
+entries of the gallery. Note that the entries of the gallery are always
+direct children of the gallery.
+
+|`extension`
+|string
+|`/.[^.]+$/`
+|Specify the extension for the images with a
+regex. Is used to reconstruct the filename of the images, change it if
+you need. For example `/.jpg$/` is to detect only the ".jpg" extension
+and no more.
+
+|`refreshTime`
+|integer
+|`250`
+|The waited time before checking the page size. If
+the page width has changed the gallery layout is rebuilt.
+
+|`refreshSensitivity`
+|integer
+|`0`
+|Change in width allowed (in px) without
+re-building the gallery.
+
+|`rel`
+|string
+|na
+|To rewrite all the links `rel` attribute with the specified
+value. For example can be 'gallery1', and is usually used to create
+gallery group for the lightbox (e.g. Colorbox).
+
+|`target`
+|string
+|na
+|To rewrite all the links `target` attribute with the
+specified value. For example, if you don't use a lightbox, specifying
+`&#x5F;blank`, all the images will be opened to another page.
+
+|`justifyThreshold`
+|float
+|0.75
+|If _'available space' / 'row width' > 0.75_
+the last row is justified, even though the `lastRow` setting is
+`'nojustify'`.
+
+|`cssAnimation`
+|boolean
+|false
+|Use or not css animations. Using css animations
+you can change the behavior changing the justified gallery CSS file, or
+overriding that rules.
+
+|`imagesAnimationDuration`
+|integer
+|300
+|Image fadeIn duration (in milliseconds).
+
+|`captionSettings`
+|string
+|`{ animationDuration: 500, visibleOpacity: 0.7, nonVisibleOpacity: 0.0 }`
+|Caption settings. To configure the animation duration (in
+milliseconds), the caption opacity when the mouse is over (i.e. it
+should be visible), and the caption opacity when the mouse is not over
+(i.e. it should be not visible).
+
+|===

@@ -1,0 +1,44 @@
+At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
+gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
+ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+
+++++
+  <div class="row no-gutters mt-3">
+    <div id="jg_old_times"></div>
+  </div>
+++++
+
+At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
+gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
+ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+
+[source, html]
+----
+  <div id="j1_basic_gallery_lb" class="mb-4">
+    <a href="/assets/images/gallery/images/justified_gallery/24096687789_c37d45712f_b.jpg"
+       data-lightbox="basic-gallery-set"
+       data-title="Peace of mind">
+      <img alt="Peace of mind" src="/assets/images/gallery/images/justified_gallery/24096687789_c37d45712f_b.jpg"/>
+    </a>
+  ...
+    <a href="/assets/images/gallery/images/justified_gallery/13824674674_ca1e482394_b.jpg"
+       data-lightbox="basic-gallery-set"
+       data-title="Deep sea">
+      <img alt="Deep sea" src="/assets/images/gallery/images/justified_gallery/13824674674_ca1e482394_b.jpg"/>
+    </a>
+  </div>
+  ...
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var justifiedGalleryConf = {
+        rowHeight:            120,
+        maxRowHeight:         false,
+        lastRow:              'nojustify'
+      };
+
+      $("#j1_basic_gallery_lb").justifiedGallery( justifiedGalleryConf );
+    });
+  </script>
+----

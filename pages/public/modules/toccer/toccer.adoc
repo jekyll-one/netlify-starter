@@ -1,0 +1,80 @@
+---
+title:                                  Toccer
+title_extention:                        Integrated TOC Generator Module for J1 Template
+tagline:                                User Guide for J1 Template
+
+date:                                   2022-08-14
+#last_modified:                         2023-01-01
+
+description: >
+                                        Toccer id an integrated TOC (table of contens) Generator
+                                        Module for J1 Template.
+keywords: >
+                                        Jekyll, JekyllOne, Theme, User Guide, Module, Table Of Contents, TOC,
+                                        Toccer, Manual
+
+categories:                             [ Manual, Module ]
+tags:                                   [ Toccer ]
+
+image:
+  path:                                 /assets/images/modules/attics/1920x1280/vladimir-kudinov.jpg
+  width:                                1920
+  height:                               1280
+
+tts:                                    true
+comments:                               false
+exclude_from_search:                    false
+regenerate:                             false
+permalink:                              /pages/public/manuals/modules/toccer/
+
+resources:                              [ animate, clipboard, lightbox, rouge ]
+resource_options:
+  - attic:
+      slides:
+        - url:                          /assets/images/modules/attics/1920x1280/vladimir-kudinov.jpg
+          alt:                          Photo by Vladimir Kudinov on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Vladimir Kudinov
+            href:                       https://unsplash.com/@madbyte
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="all" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+CAUTION: This page is under construction. An updated version will be
+available soon.
+
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+Tocbot for J1 Theme is a jQuery plugin for …​
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+voluptua.
+
+At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
+gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+include::{documentdir}/100_tocbot_library.asciidoc[]
+
+include::{documentdir}/200_tocbot_integration.asciidoc[]

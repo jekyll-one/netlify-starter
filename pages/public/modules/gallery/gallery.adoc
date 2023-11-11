@@ -1,0 +1,88 @@
+---
+title:                                  Galleries
+title_extention:                        Integrated Gallery Module for J1 Template
+tagline:                                User Guide For J1 Template
+
+date:                                   2022-08-14
+last_modified:                          2023-10-18
+
+description: >
+                                        To create image and video galleries, J1 Template implements
+                                        Justified Gallery as the main Gallery Module. Justified Gallery
+                                        is a JQuery plugin to create responsive, infinite, and high
+                                        quality justified image galleries. J1 Theme combines the
+                                        gallery with lightboxes to enlarge the Gallery's images
+                                        and adds support for video-based content.
+keywords: >
+                                        Jekyll, JekyllOne, Theme, User Guide, Module, Image, Video,
+                                        Gallery, Justified Gallery, Manual
+
+categories:                             [ Manual, Module ]
+tags:                                   [ Gallery ]
+
+image:
+  path:                                 /assets/images/modules/attics/1920x1280/josh-liu.jpg
+  width:                                1920
+  height:                               1280
+
+tts:                                    true
+comments:                               false
+exclude_from_search:                    false
+regenerate:                             false
+permalink:                              /pages/public/manuals/modules/gallery/
+
+resources:                              [
+                                          animate, clipboard,
+                                          lightbox, gallery, lightgallery,
+                                          rouge
+                                        ]
+resource_options:
+  - attic:
+      slides:
+        - url:                          /assets/images/modules/attics/1920x1280/josh-liu.jpg
+          alt:                          Photo by Josh Liu on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Josh Liu
+            href:                       https://unsplash.com/@joshtw
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="all" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+CAUTION: This page is under construction. An updated version will be
+available soon.
+
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+
+To create image and video galleries, J1 Theme implements `Justified Gallery`
+as the main `Gallery Module`. Justified Gallery is a JQuery plugin to create
+responsive, infinite, and high-quality justified image galleries. J1 Theme
+combines the Gallery with lightboxes to enlarge the Gallery's images
+and adds support for video-based content.
+
+include::{documentdir}/justified_gallery_integration.asciidoc[]
+
+include::{documentdir}/justified_gallery_examples.asciidoc[]
+
+include::{documentdir}/justified_gallery_library.asciidoc[]

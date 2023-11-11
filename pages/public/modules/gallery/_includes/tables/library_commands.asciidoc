@@ -1,0 +1,19 @@
+.API Commands
+[cols="4a,8a", options="header", role="table-responsive rtable"]
+|===
+|Command |Description
+
+|`norewind`
+|Call again justified gallery, but only the newest images
+will be justified. This command could be used for example with the
+infinite scroll. Remember that
+with norewind only the last images will be analyzed, so this means that
+any filter, sort or shuffle actions will only be done on the last
+entries. That is a great advantage in terms of performances, but pay
+attention in case you want a different behaviour.
+
+|`destroy`
+|Destroy the justified gallery instance. The images
+justification will be cleared.
+
+|===

@@ -1,0 +1,24 @@
+[source, html]
+----
+  <div id="butzheim-gallery" class="mb-4">
+    <a href="/assets/images/gallery/images/oo_butzheim/2015_07_26_DSC_0291_01.jpg"
+       data-lightbox="butzheim-gallery-set"
+       data-title="Voll der Turm">
+      <img alt="Der Turm" src="/assets/images/gallery/images/oo_butzheim/2015_07_26_DSC_0291_01.jpg"/>
+    </a>
+    <a href="/assets/images/gallery/images/oo_butzheim/2016_08_31_DSC_6590.jpg"
+       data-lightbox="butzheim-gallery-set"
+       data-title="Voll total grün">
+      <img alt="Total grün" src="/assets/images/gallery/images/oo_butzheim/2016_08_31_DSC_6590.jpg"/>
+    </a>
+
+  </div>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("#butzheim-gallery").justifiedGallery({
+        rowHeight: 220
+      });
+    });
+  </script>
+----

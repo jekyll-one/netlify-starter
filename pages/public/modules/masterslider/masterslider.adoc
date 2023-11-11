@@ -1,0 +1,2263 @@
+---
+title:                                  Master Slider
+title_extention:                        Integrated Master Slider Module for J1 Template
+tagline:                                User Guide For J1 Template
+
+date:                                   2022-08-14
+#last_modified:                         2023-01-01
+
+description: >
+                                        The Javascript tool Master Slider is a 3rd party plugin
+                                        fully integrated into J1 Template by the module masterslider.
+                                        J1 uses the free version of Master Slider (MS Lite). The lite
+                                        version does not support all features like slider layouts
+                                        and no overlays are supported by the lite version.
+keywords: >
+                                        Jekyll, JekyllOne, Theme, User Guide, Module, Lite, Master Slider,
+                                        Slider, Slideshow, Manual
+
+categories:                             [ Manual, Module ]
+tags:                                   [ MasterSlider, Slider ]
+
+image:
+  path:                                 /assets/images/pages/masterslider/teemu-paananen-1920x1280.gray.jpg
+  width:                                1920
+  height:                               1280
+
+tts:                                    true
+comments:                               false
+exclude_from_search:                    false
+compress:                               false
+regenerate:                             false
+permalink:                              /pages/public/manuals/modules/masterslider/
+
+resources:                              [ animate, clipboard, lightbox, masterslider, rouge ]
+resource_options:
+  - attic:
+      slides:
+        - url:                          /assets/images/pages/masterslider/teemu-paananen-1920x1280.gray.jpg
+          alt:                          Photo by Teemu Paananen on Unsplash
+          title:                        Manuals
+          tagline:                      master slider
+          badge:
+            type:                       unsplash
+            author:                     Teemu Paananen
+            href:                       https://unsplash.com/@xteemu
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:master-slider--documentation:          http://www.masterslider.com/doc/
+
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The Javascript tool _Master Slider_ is a 3rd party plugin fully integrated
+into the J1 Theme by the module `masterslider`. J1 uses the *free* version
+of _Master Slider_ (MS Lite). The lite the version does *not* support all
+features like slider layouts and no overlays are supported by the lite version.
+
+TIP: For all possible slider configurations, see __Master Slider__'s official
+link:{master-slider--documentation}[documentation, {browser-window--new}]
+to see a a full list of all slider options available.
+
+Read the following sections on using the module for your web pages.
+
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+
+== Page configuration
+
+The module `masterslider` is defined by resource record of type *ondemand*
+and only available with a page if the module is explicitly requested.
+
+.Front matter settings
+[source, yaml, role="noclip"]
+----
+---
+title:                                  <your title>
+tagline:                                <your tagline>
+...
+resources:                              [ masterslider ] <1>
+resource_options:
+  <your options>
+---
+----
+<1> The module `masterslider` needs to be given with the record *resources*
+as the resource in only available on demand.
+
+=== Asciidoc Markup
+
+J1 Theme provides an Asciidoc Extension `masterslider::` to integrate
+already configured MS sliders by an Asciidoc Markup into your web pages.
+The extension is easy to use as only two parameters are required:
+
+* ms slider `ID`
+* additional `CSS classes` (optional)
+
+[source, html, role="noclip"]
+----
+masterslider::slider_id[]
+masterslider::slider_id[role="additional CSS classes"]
+----
+
+
+== J1 Resource configuration
+
+Find all resource settings in the Resource configuration
+file `~/_data/resources.yml`.
+
+.Resource record for the J1 Module Master Slider
+[source, yaml, role="noclip"]
+----
+# ------------------------------------------------------------------------------
+# MasterSlider, lite|free version 2.85.13 - Feb 2022
+#
+- name:                               Master Slider Lite
+  resource:
+    enabled:                          true
+
+    id:                               masterslider
+    comment:                          Module Master Slider Lite
+    region:                           head
+    layout:                           [ all ]
+    required:                         ondemand
+    preload:                          false
+    script_load:                      sync
+    dependencies:                     false
+    pass_init_data:                   true
+    data:
+      css:                            [
+                                        modules/masterslider/css/masterslider,
+                                        modules/masterslider/css/theme/uno
+                                      ]
+      files:                          [ adapter/js/masterslider.js ]
+      js:                             [
+                                        modules/masterslider/js/plugins/jquery.easing,
+                                        modules/masterslider/js/masterslider
+                                      ]
+      init_function:                  [ j1.adapter.masterslider.init ]
+----
+
+== J1 Module configuration
+
+Before MS sliders are used with your websites, all sliders must be set up
+via the module's *user* configuration. The sliders used can be configured
+below the `sliders` key in the `masterslider.yml` configuration file located
+in the folder `~/_data/modules`.
+
+.J1 Module Configuration (excerpt)
+[source, yaml, role="noclip"]
+----
+# ------------------------------------------------------------------------------
+# User settings
+#
+settings:
+
+  # ----------------------------------------------------------------------------
+  # Sliders
+  # ----------------------------------------------------------------------------
+  #
+  sliders:
+
+    # --------------------------------------------------------------------------
+    # Slider 1, Simple Boxed
+    #
+    - slider:
+      enabled:                          true
+
+      id:                               ms_00001
+      skin:                             light-3
+
+      lightbox:
+        enabled:                        true
+        type:                           lb
+
+      # ------------------------------------------------------------------------
+      # Slider controls
+      #
+      controls:
+
+        arrows:
+          enabled:                      true
+
+        bullets:
+          enabled:                      true
+
+      # ------------------------------------------------------------------------
+      # Slider options
+      #
+      options:
+
+        width:                          1200
+        height:                         600
+        applyFiltersAllSlides:          true
+        filters:
+          grayscale:                    0.5
+          sepia:                        0.5
+
+      # ------------------------------------------------------------------------
+      # Slides
+      #
+      slides:
+
+        # slide 1
+        #
+        - slide:
+          alt:                          Cat 1
+          title:                        Cat 1
+          foreground_image:             /assets/images/modules/masterslider/slider_1/cat-1.jpg
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  false
+          slideinfo:                    false
+
+         ...
+----
+
+== J1 Module initialization
+
+After MS sliders are set up, the instances of the sliders needs to be
+*initialized** the make the ready to use. The J1 module `masterslider`
+*automatically* generates an initializer script (the *Slider Manager*)
+placed (dynamically) in the HTML source of a page *before* the closing
+body tag (`</body`).
+
+.MS Slider Manager (excerpt)
+[source, html, role="noclip"]
+----
+<script id="ms-slider-manager">
+  $(function() {
+  console.debug("initializing MS Slider Manager");
+
+  var masterslider_1 = new MasterSlider();
+  var masterslider_2 = new MasterSlider();
+  var masterslider_3 = new MasterSlider();
+  var masterslider_4 = new MasterSlider();
+
+  ...
+
+      masterslider_1.control(
+        'arrows', {
+          "autohide":false,
+          "overVideo":true,
+          "hideUnder":nul
+      });
+	    masterslider_1.control(
+        'bullets', {
+          "autohide":false,
+          "overVideo":true,
+          "dir":"h",
+          "hideUnder":null,
+          "align":"bottom",
+          "margin":10
+      });
+	    masterslider_3.control(
+        'slideinfo', {
+          "autohide":false,
+          "overVideo":true,
+          "insertTo":"",
+          "size":100,
+          "hideUnder":null,
+          "align":"bottom",
+          "inset":false,
+          "margin":-133
+      });
+	    masterslider_4.control(
+        'bullets', {
+          "autohide":false,
+          "overVideo":true,
+          "dir":"h",
+          "hideUnder":null,
+          "align":"bottom",
+          "margin":10
+      });
+	    masterslider_4.control(
+        'thumblist', {
+          "width":100,
+          "height":80,
+          "autohide":false,
+          "overVideo":true,
+          "dir":"v",
+          "speed":17,
+          "hideUnder":null,
+          "inset":false,
+          "arrows":false,
+          "hover":false,
+          "customClass":"",
+          "align":"right",
+          "type":"thumbs",
+          "margin":1,
+          "space":1,
+          "fillMode":"fill"
+      });
+	    masterslider_4.control(
+        'scrollbar', {
+          "autohide":false,
+          "overVideo":true,
+          "dir":"h",
+          "inset":true,
+          "align":"top",
+          "color":"#404040",
+          "hideUnder":null,
+          "margin":10,
+          "width":4
+      });
+
+      ...
+
+	    masterslider_4.setup(
+        'ms_00004', {
+          "width":1200,
+          "height":600,
+          "minHeight":0,
+          "space":0,
+          "start":1,
+          "grabCursor":true,
+          "swipe":true,
+          "mouse":true,
+          "keyboard":false,
+          "layout":"boxed",
+          "wheel":false,
+          "autoplay":false,
+          "instantStartLayers":false,
+          "mobileBGVideo":false,
+          "loop":false,
+          "shuffle":false,
+          "preload":0,
+          "heightLimit":true,
+          "autoHeight":false,
+          "smoothHeight":true,
+          "endPause":false,
+          "overPause":true,
+          "fillMode":"fill",
+          "centerControls":true,
+          "startOnAppear":false,
+          "layersMode":"center",
+          "autofillTarget":"",
+          "hideLayers":false,
+          "fullscreenMargin":0,
+          "speed":20,
+          "dir":"h",
+          "responsive":true,
+          "tabletWidth":768,
+          "tabletHeight":null,
+          "phoneWidth":480,
+          "phoneHeight":null,
+          "sizingReference":"window",
+          "parallaxMode":"mouse",
+          "filters":null,
+          "view":"basic"
+      });
+	    j1.masterslider.instances.push(masterslider_4);
+
+      ...
+
+  console.debug("initializing MS Slider Manager finished");
+  });
+</script>
+----
+
+== Example Slider
+
+This MS Slider is using a quite simple configuration. This config is a good
+base to try out other configuration features provided by MS Lite. Additionally,
+this MS Slider is using the (CSS) *filter* feature of Master Slider. Filters can
+be used for example to *transform* the *style* of the images provided by a
+MS Slider. In this example, the MS Slider images are transformed from style *color*
+to *sepia*.
+
+NOTE: Lightbox support is only available for J1 Theme. The product version
+*MS Lite* and *MS Pro* does not support Lightboxes on sliders
+out-of-the-box.
+
+TIP: Click on the Lightbox symbol mdi:image-outline[18px, md-gray] in the
+slides to see the base *colored* images.
+
+*Slider 1* is using the following general settings:
+
+.General settings
+[cols="^3a,^3a,6a", options="header", width="100%", role="rtable mt-3"]
+|===
+|Setting |Value |Description
+
+|skin
+|`light-3`
+|Skins control the design for the base UI elements `arrows` and `bullets`
+
+|layout
+|`boxed`
+|The MS Slider width and height is defined by the slider *options*
+
+|lightbox
+|`true`
+|Type of the lightbox `lb` (Lightbox V2)
+
+|controls
+|`arrows`
+|Default settings. The settngs are defined in `~/_data/defalt/masterslider.yml`.
+The design is taken as CSS styles taken from the MS Slider module *resources*
+(~/assets/themes/j1/modules/masterslider/css/skins).
+
+|controls
+|`bullets`
+|Default settings. The settngs are defined in `~/_data/defalt/masterslider.yml`.
+The design is taken as CSS styles taken from the MS Slider module *resources*
+(~/assets/themes/j1/modules/masterslider/css/skins).
+
+|filters
+|`grayscale`
+|value: 0.5
+
+|filters
+|`sepia`
+|value: 0.5
+
+|===
+
+WARNING: Do not use the *identical* slider *ids* on the same page. Duplicate
+ids on the same page will cause the module initialization to fail and result
+in *no* sliders being usable.
+
+[[module-configuration-asciidoc]]
+=== MS Slider settings
+
+For the standard version of MS Lite, *no* filters are supported. J1 Theme
+is using a extended version of MS Lite to support (CSS) filters for your
+silders.
+
+[NOTE]
+====
+The property `applyFiltersAllSlides` is only available for the J1 version
+of MS Lite.
+
+For default, filters are applied to all (background) images of a MS Slider
+except the *active* (visible/selected) slide. If `applyFiltersAllSlides` is
+set to `true`, filters are applied on *all* images including the *active*
+slide. This can be used for example to transform all the images of a slider
+to grayscale, sepia etc. or by *combinations* of filters to add multiple
+effects.
+====
+
+TIP: Find the *full* MS Slider settings in the Master Slider configuration
+file `~/_data/masterslider.yml`.
+
+[source, yaml]
+----
+  # ----------------------------------------------------------------------------
+  # Sliders
+  # ----------------------------------------------------------------------------
+  #
+  sliders:
+
+    # --------------------------------------------------------------------------
+    # Slider 1, Simple Boxed
+    #
+    - slider:
+      enabled:                          true
+
+      id:                               ms_00001
+      skin:                             light-3
+
+      lightbox:
+        enabled:                        true
+        type:                           lb
+
+      # ------------------------------------------------------------------------
+      # Slider controls
+      #
+      controls:
+
+        arrows:
+          enabled:                      true
+
+        bullets:
+          enabled:                      true
+
+      # ------------------------------------------------------------------------
+      # Slider options
+      #
+      options:
+
+        width:                          1200
+        height:                         600
+        applyFiltersAllSlides:          true
+        filters:
+          grayscale:                    0.5
+          sepia:                        0.5
+
+      # ------------------------------------------------------------------------
+      # Slides
+      #
+      slides:
+
+        # slide 1
+        #
+        - slide:
+          alt:                          Cat 1
+          title:                        Cat 1
+          foreground_image:             /assets/images/modules/masterslider/slider_1/cat-1.jpg
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  false
+          slideinfo:                    false
+
+        # slide 2
+        #
+        - slide:
+          alt:                          Cat 2
+          title:                        Cat 2
+          foreground_image:             /assets/images/modules/masterslider/slider_1/cat-2.jpg
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  false
+          slideinfo:                    false
+
+        # slide 3
+        #
+        - slide:
+          alt:                          Cat 3
+          title:                        Cat 3
+          foreground_image:             /assets/images/modules/masterslider/slider_1/cat-3.jpg
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  false
+          slideinfo:                    false
+
+----
+
+[[example-markup-asciidoc]]
+=== Asciidoc Markup
+
+To place a MS Slider in your Asciidoc-based sources, the use of the Asciidoc
+extension `masterslider::` is recommended.
+
+[source, no_template]
+----
+masterslider::ms_00001[role="mt-4 mb-5"]
+----
+
+[[example-markup-html]]
+=== HTML Markup
+
+MS sliders are based on so-called *templates*. A template defines the HTML
+portion, the base HTML structure of a slider in a webpage. The J1 module
+`masterslider` is fully configurable. Based on the J1 configuration of an
+MS slider, the template is automatically generated and loaded as required - no
+need for any programming or writing HTML code for your MS sliders.
+
+Find the *automatically* generated template (HTML code) for slider `ms_00001`
+below.
+
+.HTML portion of slider `ms_00001`
+[source, html]
+----
+
+<div id="p_ms_00001" class="master-slider-parent mt-4 mb-5">
+
+  <div id="ms_00001" class="master-slider ms-skin-light-3">
+
+    <div id="lightgallery_ms_00001" class="lightgallery-container" style="display: none;">
+      <img id="ms_00001_1" src="/assets/images/modules/masterslider/slider_1/cat-1.jpg" alt="Cat 1" title="Cat 1">
+      <img id="ms_00001_2" src="/assets/images/modules/masterslider/slider_1/cat-2.jpg" alt="Cat 2" title="Cat 2">
+      <img id="ms_00001_3" src="/assets/images/modules/masterslider/slider_1/cat-3.jpg" alt="Cat 3" title="Cat 3">
+    </div>
+
+    <div id="ms-slide-ms_00001-1" class="ms-slide ms-slide-ms_00001">
+      <img class="ms_00001-lg-item"
+        src="/assets/themes/j1/modules/masterslider/css/blank.gif"
+        alt="Cat 1" title="Cat 1"
+        data-src="/assets/images/modules/masterslider/slider_1/cat-1.jpg"
+      />
+    </div>
+    <div id="ms-slide-ms_00001-2" class="ms-slide ms-slide-ms_00001">
+      <img class="ms_00001-lg-item"
+        src="/assets/themes/j1/modules/masterslider/css/blank.gif"
+        alt="Cat 2" title="Cat 2"
+        data-src="/assets/images/modules/masterslider/slider_1/cat-2.jpg"
+      />
+    </div>
+    <div id="ms-slide-ms_00001-3" class="ms-slide ms-slide-ms_00001">
+      <img class="ms_00001-lg-item"
+        src="/assets/themes/j1/modules/masterslider/css/blank.gif"
+        alt="Cat 3" title="Cat 3"
+        data-src="/assets/images/modules/masterslider/slider_1/cat-3.jpg"
+      />
+    </div>
+
+  </div>
+
+</div>
+----
+
+[[example-js-initializer]]
+=== JS Initialisation
+
+Based on the J1 configuration of an MS slider, the Javascript Initializer for
+the template is automatically generated and loaded as required by the J1 module
+`masterslider`. Again, no need for any programming or writing code for your
+MS sliders.
+
+Find the *automatically* generated Javascript Initializer for the slider
+`ms_00001` below.
+
+.JS initializer of slider `ms_00001`
+[source, js]
+----
+var masterslider_1 = new MasterSlider();
+
+// generated slider control settings
+masterslider_1.control(
+    'arrows', {
+    "autohide": false,
+    "overVideo": true,
+    "hideUnder": null
+});
+
+masterslider_1.control(
+  'bullets', {
+    "autohide": false,
+    "overVideo": true,
+    "dir": "h",
+    "hideUnder": null,
+    "align": "bottom",
+    "margin": 10
+});
+
+// generated slider setup settings
+masterslider_1.setup(
+  'ms_00001', {
+    "width": 1200,
+    "height": 600,
+    "minHeight": 0,
+    "space": 0,
+    "start": 1,
+    "grabCursor": true,
+    "swipe": true,
+    "mouse": true,
+    "keyboard": false,
+    "layout": "boxed",
+    "wheel": false,
+    "autoplay": false,
+    "instantStartLayers": false,
+    "mobileBGVideo": false,
+    "loop": false,
+    "shuffle": false,
+    "preload": 0,
+    "heightLimit": true,
+    "autoHeight": false,
+    "smoothHeight": true,
+    "endPause": false,
+    "overPause": true,
+    "fillMode": "fill",
+    "centerControls": true,
+    "startOnAppear": false,
+    "layersMode": "center",
+    "autofillTarget": "",
+    "hideLayers": false,
+    "fullscreenMargin": 0,
+    "speed": 20,
+    "dir": "h",
+    "responsive": true,
+    "tabletWidth": 768,
+    "tabletHeight": null,
+    "phoneWidth": 480,
+    "phoneHeight": null,
+    "sizingReference": "window",
+    "parallaxMode": "mouse",
+    "filters": {
+      "grayscale": 0.5,
+      "sepia": 0.5
+    },
+    "view": "basic",
+    "applyFiltersAllSlides": true
+});
+// save slider config for later access
+j1.masterslider.instances.push(masterslider_1);
+----
+
+[[rendered-slider-asiidoc]]
+=== Rendered Slider
+
+See the rendered slider below (id: `ms_00001`) based on the Asciidoc Markup
+using the extension `masterslider::`.
+
+masterslider::ms_00001[role="mt-4 mb-5"]
+
+
+== MS Slider properties
+
+Find below all available property settings for MS Sliders and their UI elements
+(controls).
+
+=== Slider Options
+
+You can use/change following options in slider `setup` method. For example:
+
+[source, html]
+----
+<script>
+    var slider = new MasterSlider();
+
+    slider.setup('masterslider' , {
+      width:800,    // slider standard width
+      height:350,   // slider standard height
+      space:5,
+      fullwidth:true,
+      autoHeight:true,
+      view:"mask"
+      // more slider options goes here...
+  });
+
+</script>
+----
+
+.Slider options
+[cols="^3a,^3a,^6a",  options="header", width="100%", role="rtable mt-3"]
+|===
+|Option |Default Value |Description
+
+|`width`
+|300
+|The base width of slides. It helps the slider to resize in correct.
+ratio.
+
+|`height`
+|150
+|The base height of slides, It helps the slider to resize in correct ratio.
+
+|`start`
+|1
+|The slider starting slide number.
+
+|`space`
+|0
+|The spacing value between slides in pixels.
+
+|`grabCursor`
+|true
+|Whether the slider uses grab mouse cursor.
+
+|`swipe`
+|true
+|Whether the drag/swipe navigation is enabled.
+
+|`mouse`
+|true
+|Whether the user can use mouse drag navigation.
+
+|`wheel`
+|false
+|Enables mouse scroll wheel navigation.
+
+|`keyboard`
+|false
+|Enables keyboard navigation.
+
+|`autoplay`
+|false
+|Enables the autoplay slideshow.
+
+|`loop`
+|false
+|Enables the continuous sliding mode.
+
+|`shuffle`
+|false
+|Enables the shuffle slide order.
+
+|`preload`
+|0
+|Specifies number of slides which will be loaded by slider. 0 value means
+slider will load slides in sequence and "all" value means slider will
+load all of the slides at starting. This option is only effective for
+images which has "data-src" attribute.
+
+|`layout`
+|boxed
+|Specifies layout of the slider, it accepts following values:
+
+* `boxed` -- The default layout of slider, size of the slider does not
+  exceed the specified width and height in slider options
+* `fullwidth` -- Forces the slider to adapt width to the browser width
+* `fullscreen` -- Forces the slider to adapt width and height to the
+  browser window dimension
+* `fillwidth` -- Enables the slider to adapt width to its parent element.
+* `autofill` -- Enables the slider to adapt width and height to its parent
+  element
+* `partialview` -- It's like the boxed layout but nearby slides are always
+  visible
+
+|`fullscreenMargin`
+|0
+|Specifies margin space at the bottom of slider, it only affects with
+`fullscreen` layout.
+
+|`heightLimit`
+|false
+|It force the slide to use max height value as its base specified height
+value.
+
+|`autoHeight`
+|false
+|Whether the slider adapts its height to each slide height or not. It
+overrides `heightLimit` option.
+
+|`smoothHeight`
+|true
+|Whether the slider uses smooth animation while its height changes.
+
+|`endPause`
+|false
+|Whether the slider pauses slideshow when it reaches to last slide.
+
+|`overPause`
+|false
+|Whether the slider pauses slideshow on hover.
+
+|`fillMode`
+|fill
+|Specifies the slide background scaling method. Its acceptable values are
+`fill`, `fit`, `stretch`, `center` and `tile`.
+
+|`centerControls`
+|true
+|Whether the slider aligns UI controls to center. This option is only
+effective in full width mode.
+
+|`layersMode`
+|center
+|It accepts two values `center` and `full`. The "center" value indicates
+that the slider aligns layers to the center. This option is only
+effective in full width mode.
+
+|`instantStartLayers`
+|false
+|Whether start show transition of layers before slide transition
+complete.
+
+|`parallaxMode`
+|mouse
+|Specifies type of layers parallax move, it accepts below values:
+
+* `mouse` -- It moves the layers while mouse is moving
+* `swipe` -- It moves layers while slider is sliding or swiping
+* `mouse:x-only` -- It moves the layers only on X-axis while mouse is
+  moving (horizontally moves)
+* `mouse:y-only` -- It moves the layers only on Y-axis while mouse is
+  moving (vertically moves)
+
+|`filters`
+|null
+|Applys (CSS3) filters to slide transition views. For more information
+check link:http://www.masterslider.com/doc/#filters[Adding CSS3 filters, {browser-window--new}].
+
+Available filters: +
+
+* blur, default: 0
+* brightness, default: 1
+* contrast, default: 1
+* grayscale, default: 0
+* hue-rotate, default: 0
+* invert, default: 0
+* opacity, defalt: 1
+* saturate, default: 1
+* sepia, default: 0
+
+|`applyFiltersAllSlides`
+|false
+|Filters are applied to all (background) images of a slider except the
+active (visible/selected) slide on position 0. If applyFiltersAllSlides is
+set to `true`, filters are set on all images *including* the *active*
+slide. This can be used for example to transform the images to grayscale,
+sepia etc. +
+
+WARNING: Available on for J1 Theme (MS Lite version).
+
+|`duoColor`
+|false
+|Transforms a slider (background images) in a duo-color style. +
+
+WARNING: Available on for J1 Theme (MS Lite version).
+
+|`hideLayers`
+|false
+|Whether the slider hides all layers before changing slide
+
+|`speed`
+|17
+|Specifies slide changing speed. It accepts float values between 0 and 100.
+
+|`dir`
+|h
+|Specifies slide changing direction. It accepts two values `h`
+(horizontal) and `v` (vertical)
+
+|`view`
+|basic
+|The slide changing transition. Available settings are: +
+`fade`, `mask`, `wave`, `flow`, `stack`, `scale`, +
+`focus`, `parallaxMask`, `partialWave`, `fadeBasic`, `fadeWave`, `fadeFlow` +
+
+link:http://www.masterslider.com/doc/#views[More info here..., {browser-window--new}] +
+
+NOTE: Other parameters than `basic` are only available for the *professional*
+version of MS.
+
+|`deepLink`
+|null
+|A unique name for the slider which will be used in browser address bar
+you can enter your own name otherwise slider generates a unique one.
+
+|`deepLinkType`
+|path
+|Specifies the type of displaying slider deeplinking permalink in the
+address bar. Acceptable values: `path` and `query`.
+
+|`startOnAppear`
+|false
+|It initializes slider when slider comes inside of browser window when
+scrolling.
+
+|===
+
+=== Slider Controls
+
+You can use/change following options in slider `control` method.
+For example:
+
+[source, html]
+----
+<script>
+    var slider = new MasterSlider();
+
+    slider.setup('masterslider' , {
+      width:800,    // slider standard width
+      height:350,   // slider standard height
+      space:5,
+      fullwidth:true,
+      autoHeight:true,
+      view:"mask"
+      // more slider options goes here...
+  });
+
+  // Added arrow control (default settings) to the slider
+  slider.control('arrows');
+
+  // Added bullets control to the slider
+  slider.control(
+    'bullets', {
+      "autohide": false,
+      "overVideo": true,
+      "dir": "h",
+      "hideUnder": null,
+      "align": "bottom",
+      "margin": 10
+  });
+
+</script>
+----
+
+==== Arrows
+
+Adds arrow navigation to the slider (CSS class names: `ms-nav-next` and
+`ms-nav-prev`).
+
+.Slider control
+[cols="^3a,^3a,^6a",  options="header", width="100%", role="rtable mt-3"]
+|===
+|Name |Default Value |Description
+
+|`autohide`
+|true
+|Whether the control hides when mouse leaves the slider.
+
+|`overVideo`
+|true
+|Whether the control visible over slide video while.
+playing.
+
+|`hideUnder`
+|null
+|Hides the control if width of slider comes less than specified.
+
+|===
+
+.Example
+[source, js]
+----
+  var slider = new MasterSlider();
+  slider.setup(
+    'masterslider', {
+      width:800, height:350
+  });
+
+  slider.control(
+    'arrows', {
+      autohide:false
+  });
+----
+
+==== Bullets
+
+This UI control adds one bullet for each slide and user can change slide
+by clicking on each bullet (CSS class name: `ms-bullets`).
+
+.Slider control
+[cols="^3a,^3a,^6a",  options="header", width="100%", role="rtable mt-3"]
+|===
+|Name |Default Value |Description
+
+|`autohide`
+|true
+|Whether the control hides when mouse leaves the slider.
+
+|`overVideo`
+|true
+|Whether the control visible over slide video while playing.
+
+|`dir`
+|h
+|Specifies the direction of control. It accepts two values `h`
+(horizontal) and `v` (vertical).
+
+|`hideUnder`
+|null
+|Hides the control if width of slider comes less than specified.
+
+|`align`
+|bottom
+|Aligns the control to in or out of slider. It accepts
+`top`, `bottom`, `left` and `right` values.
+
+|`margin`
+|10
+|Specifies the space between the control and slider in pixel.
+
+|===
+
+.Example:
+[source, js]
+----
+  var slider = new MasterSlider();
+
+  slider.setup(
+    'masterslider', {
+      width:800, height:350
+  });
+
+  slider.control(
+    'bullets', {
+      autohide:false,
+      dir:"v",
+      align:"top"
+  });
+----
+
+
+==== Thumblist
+
+This control searches for an element which has `ms-thumb` as class name
+in slider html then creates a list of thumbnails (CSS class name:
+`ms-thumb-list`).
+
+NOTE: You can create a div element with `ms-thumb` class name in each
+slide and use html instead of image in thumbnail list. Like following:
+
+[source, html]
+----
+  <!-- new slide -->
+  <div class="ms-slide">
+
+    <!-- slide background -->
+    <img src="masterslider/blank.gif" data-src="masterslider/images/3.jpg" alt="lorem ipsum dolor sit"/>
+
+    <!-- slide text title it shows in thumbnail list. -->
+    <div class="ms-thumb"Lorem ipsum dolore</div>
+
+  </div>
+  <!-- end of slide -->
+----
+
+.Slider control
+[cols="^3a,^3a,^6a",  options="header", width="100%", role="rtable mt-3"]
+|===
+|Name |Default Value |Description
+
+|`autohide`
+|true
+|Whether the control hides when mouse leaves the slider.
+
+|`overVideo`
+|true
+|Whether the control visible over slide video while playing.
+
+|`width`
+|100
+|Specifies the width of each thumb in pixel.
+
+|`height`
+|100
+|Specifies the height of each thumb in pixel.
+
+|`type`
+|thumbs
+|Specifies the type of control, it can used as `thumbs` or `tabs`.
+
+|`dir`
+|h
+|Specifies the direction of control. It accepts two values `h`
+(horizontal) and `v` (vertical).
+
+|`speed`
+|17
+|Specifies scrolling speed. It accepts float values between 0 and 100.
+
+|`hideUnder`
+|null
+|Hides the control if width of slider comes less than specified.
+
+|`align`
+|bottom
+|Aligns the control to in or out of slider. It accepts
+`top`, `bottom`, `left` and `right` values.
+
+|`hover`
+|false
+|Whether change slides on hovering over thumbs.
+
+|`arrows`
+|false
+|Whether add arrows in thumblist.
+
+|`inset`
+|false
+|Whether insert the control inside or outside of slider.
+
+|`margin`
+|10
+|Specifies the space between the control and slider in pixel.
+
+|`space`
+|10
+|Specifies the space between thumbs or tabs.
+
+|===
+
+.Example
+[source, js]
+----
+  var slider = new MasterSlider();
+
+  slider.setup(
+    'masterslider', {
+      width:800,
+      height:350
+  });
+
+  slider.control('bullets');
+  slider.control(
+    'thumblist', {
+      autohide:false,
+      dir:"v"
+  });
+----
+
+
+==== Scrollbar
+
+This UI control adds a scroll bar in slider which moves when each slide
+changes (CSS class name: `ms-sbar`).
+
+.Slider control
+[cols="^3a,^3a,^6a",  options="header", width="100%", role="rtable mt-3"]
+|===
+|Name |Default Value |Description
+
+|`autohide`
+|true
+|Whether the control hides when mouse leaves the slider.
+
+|`overVideo`
+|true
+|Whether the control visible over slide video while playing
+
+|`dir`
+|h
+|Specifies the direction of control. It accepts two values `h`
+(horizontal) and `v` (vertical).
+
+|`color`
+|"#3D3D3D"
+|Specifies the color scrollbar handle color.
+
+|`width`
+|4
+|Specifies the width of scrollbar handle in pixel
+
+|`hideUnder`
+|null
+|Hides the control if width of slider comes less than specified
+
+|`align`
+|bottom
+|Aligns the control to in or out of slider. It accepts
+`top`, `bottom`, `left` and `right` values.
+
+|`inset`
+|false
+|Whether insert the control inside or outside of slider
+
+|`margin`
+|10
+|Specifies the space between the control and slider in pixel
+
+|===
+
+.Example
+[source, js]
+----
+  var slider = new MasterSlider();
+
+  slider.setup(
+    'masterslider', {
+      width:800, height:350
+  });
+
+  slider.control(
+    'thumblist', {
+      autohide:false,
+      dir:"v"
+    });
+  slider.control(
+    'scrollbar', {
+      dir:"v"
+  });
+----
+
+
+==== CircleTimer
+
+It adds a circle timer into slider. This control only works in modern
+browsers (CSS class name: `ms-ctimer`).
+
+.Slider control
+[cols="^3a,^3a,^6a",  options="header", width="100%", role="rtable mt-3"]
+|===
+|Name |Default Value |Description
+
+|`autohide`
+|true
+|Whether the control hides when mouse leaves the slider.
+
+|`overVideo`
+|true
+|Whether the control visible over slide video while playing.
+
+|`color`
+|"#A2A2A2"
+|Specifies the color of circle timer.
+
+|`radius`
+|4
+|Specifies the radius of circle timer in pixels.
+
+|`stroke`
+|10
+|Specifies the stroke of circle timer in pixels.
+
+|`hideUnder`
+|null
+|Hides the control if width of slider comes less than specified.
+
+|===
+
+.Example
+[source, js]
+----
+  var slider = new MasterSlider();
+
+  slider.setup(
+    'masterslider', {
+      width:800,
+      height:350
+  });
+
+  slider.control(
+    'thumblist', {
+      autohide:false,
+      dir:"v"
+  });
+  slider.control(
+    'circletimer', {
+      color:"#FFDD00",
+      stroke:20
+  });
+----
+
+
+==== Timebar
+
+It adds a progress bar for timer in slider (CSS class name: `ms-timerbar`).
+
+.Slider control
+[cols="^3a,^3a,^6a",  options="header", width="100%", role="rtable mt-3"]
+|===
+|Name |Default Value |Description
+
+|`autohide`
+|true
+|Whether the control hides when mouse leaves the slider.
+
+|`overVideo`
+|true
+|Whether the control visible over slide video while playing.
+
+|`color`
+|"#FFFFFF"
+|Specifies the color of timebar.
+
+|`hideUnder`
+|null
+|Hides the control if width of slider comes less than specified.
+
+|`align`
+|bottom
+|Aligns the control to in or out of slider. It accepts
+`top`, `bottom`, `left` and `right` values.
+
+|`inset`
+|false
+|Whether insert the control inside or outside of slider.
+
+|`margin`
+|0
+|Specifies the space between the control and slider in pixel.
+
+|===
+
+.Example
+[source, js]
+----
+  var slider = new MasterSlider();
+
+  slider.setup(
+    'masterslider', {
+      width:800,
+      height:350
+  });
+
+  slider.control('timebar');
+----
+
+
+==== SlideInfo
+
+With this control you can specify a HTML value to each slide and slider
+will show the value of slide while it selected. This control searches for
+an element which has `ms-info` as class name in each slide.
+
+.Slider control
+[cols="^3a,^3a,^6a",  options="header", width="100%", role="rtable mt-3"]
+|===
+|Name |Default Value |Description
+
+|`autohide`
+|true
+|Whether the control hides when mouse leaves the slider.
+
+|`overVideo`
+|true
+|Whether the control visible over slide video while playing.
+
+|`insertTo`
+|-
+|The HTML element that the info will be added in it.
+
+|`size`
+|100
+|Specifies the width or height (based on specified direction)
+of slide info container in pixel.
+
+|`hideUnder`
+|null
+|Hides the control if width of slider comes less than specified.
+
+|`align`
+|bottom
+|Aligns the control to in or out of slider. It accepts
+`top`, `bottom`, `left` and `right` values.
+
+|`inset`
+|false
+|Whether insert the control inside or outside of slider.
+
+|`margin`
+|10
+|Specifies the space between the control and slider in pixel.
+
+|===
+
+.Example
+[source, js]
+----
+  var slider = new MasterSlider();
+
+  slider.setup(
+    'masterslider', {
+      width:800,
+      height:350
+  });
+
+  slider.control(
+    'slideinfo', {
+      insertTo:'#info'
+  });
+----
+
+
+== MS Slider API
+
+lorem:sentences[3]
+
+=== Methods
+
+lorem:sentences[3]
+
+[source, js]
+----
+  var slider = new MasterSlider();
+  slider.setup('masterslider' , {width:800, height:350});
+
+  slider.api.index();           // returns current slider index.
+  slider.api.count();           // returns total number of slides.
+
+  slider.api.next();            // next slide.
+  slider.api.previous();        // previous slide.
+  slider.api.gotoSlide(4);      // moves to 4th slide.
+
+  slider.api.pause();           // pauses the slider timer.
+  slider.api.resume();          // resumes the slider timer.
+  slider.api.currentTime();     // returns the percentage of elapsed time.
+
+  slider.api.destroy();         // removes the slider.
+----
+
+=== Properties
+
+lorem:sentences[3]
+
+[source, js]
+----
+  slider.api.so                 // returns the object of slider options.
+
+  slider.api.view               // returns the slider transition object.
+  slider.api.view.slideList     // returns a array of all slides.
+  slider.api.viwe.currentSlide  // returns the current slide object.
+----
+
+=== Events
+
+lorem:sentences[3]
+
+[source, js]
+----
+  slider.api.addEventListener(MSSliderEvent.INIT , function() {
+    // dispatches when the slider's current slide change starts.
+  });
+
+  slider.api.addEventListener(MSSliderEvent.CHANGE_START , function() {
+    // dispatches when the slider's current slide change starts.
+  });
+
+  slider.api.addEventListener(MSSliderEvent.CHANGE_END , function() {
+    // dispatches when the slider's current slide change ends.
+  });
+
+  slider.api.addEventListener(MSSliderEvent.WAITING , function() {
+    // dispatches whenever the slider timer updates.
+  });
+
+  slider.api.addEventListener(MSSliderEvent.RESIZE , function() {
+    // dispatches when the slider is resized.
+  });
+
+  slider.api.addEventListener(MSSliderEvent.VIDEO_PLAY , function() {
+    // dispatches when the slide video played.
+  });
+
+  slider.api.addEventListener(MSSliderEvent.VIDEO_CLOSE , function() {
+    // dispatches when the slide video closed.
+  });
+
+  slider.api.view.addEventListener(MSViewEvents.SWIPE_START , function() {
+    // dispatches when swipe dragging starts.
+  });
+
+  slider.api.view.addEventListener(MSViewEvents.SWIPE_END , function() {
+    // dispatches when swipe dragging ends.
+  });
+
+  slider.api.view.addEventListener(MSViewEvents.SWIPE_MOVE , function() {
+    // dispatches when swipe dragging moves.
+  });
+
+  slider.api.view.addEventListener(MSViewEvents.SWIPE_CANCEL , function() {
+    // dispatches when swipe dragging cancels.
+  });
+----
+
+== MS Slider Skins
+
+Here you can find a list of available skins which included in dowload
+package.
+
+You can change the slider skin by following these steps:
+
+. Find and upload your preferred skin from "skins" folder.
+. Import "style.css" from the skin folder into your page like following:
+
+[source, html]
+----
+  <link rel="stylesheet" href="masterslider/skins/light-2/style.css" />
+----
+
+Specify skin class name to your slider element.
+
+[source, html]
+----
+  <!-- masterslider -->
+  <div class="master-slider ms-skin-light-2" id="masterslider">
+    <!-- slides goes here -->
+  </div>
+  <!-- end of masterslider -->
+----
+
+[cols="^4,^2a,^6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
+|===
+|Control Elements |Name |Class Name
+
+|image:/assets/themes/j1/modules/masterslider/css/skins/light-skin-1.png[skin]
+|default
+|ms-skin-default
+
+|image:/assets/themes/j1/modules/masterslider/css/skins/light-skin-2.png[skin]
+|Light 2
+|ms-skin-light-2
+
+|image:/assets/themes/j1/modules/masterslider/css/skins/light-skin-3.png[skin]
+|Light 3
+|ms-skin-light-3
+
+|image:/assets/themes/j1/modules/masterslider/css/skins/light-skin-4.png[skin]
+|Light 4
+|ms-skin-light-4
+
+|image:/assets/themes/j1/modules/masterslider/css/skins/light-skin-5.png[skin]
+|Light 5
+|ms-skin-light-5
+
+|image:/assets/themes/j1/modules/masterslider/css/skins/light-skin-6.png[skin]
+|Light 6
+|ms-skin-light-6
+
+|image:/assets/themes/j1/modules/masterslider/css/skins/contrast-skin.png[skin]
+|Contrast
+|ms-skin-contrast
+
+|image:/assets/themes/j1/modules/masterslider/css/skins/black-skin-1.png[skin]
+|Black 1
+|ms-skin-black-1
+
+|image:/assets/themes/j1/modules/masterslider/css/skins/black-skin-2.png[skin]
+|Black 2
+|ms-skin-black-2
+
+|image:/assets/themes/j1/modules/masterslider/css/skins/metro-skin.png[skin]
+|Metro
+|ms-skin-metro
+
+|===
+
+/////
+== MS Slider Easing Functions
+
+IMPORTANT: This slider needs jQuery easing plugin for old browsers.
+You can include it into your page like following (in head section)
+
+[source, html]
+----
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+----
+
+=== Supported Easing Functions
+
+++++
+<article class="content-section float"
+  id="skins"
+  style="opacity: 0; position: absolute; top: 0px; left: 0px; transform: translateX(500px); display: none;"
+ ></article>
+++++
+
+[cols="^6a,^6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
+|===
+|Name |Example
+
+|linear
+|
+++++
+<div class="easedemo" data-ease="linear">
+  <div class="playbtn"></div>
+  <div class="easebox" style="left: 440px;"></div>
+</div>
+++++
+
+|easeInCubic
+|
+
+|easeOutCubic
+|
+
+|easeInOutCubic
+|
+
+|easeInCirc
+|
+
+|easeOutCirc
+|
+
+|easeInOutCirc
+|
+
+|easeInExpo
+|
+
+|easeOutExpo
+|
+
+|easeInOutExpo
+|
+
+|easeInQuad
+|
+
+|easeOutQuad
+|
+
+|easeInOutQuad
+|
+
+|easeInQuart
+|
+
+|easeOutQuart
+|
+
+|easeInOutQuart
+|
+
+|easeInQuint
+|
+
+|easeOutQuint
+|
+
+|easeInOutQuint
+|
+
+|easeInSine
+|
+
+|easeOutSine
+|
+
+|easeInOutSine
+|
+
+|easeInBack
+|
+
+|easeOutBack
+|
+
+|easeInOutBack
+|
+
+|===
+/////
+
+
+== CSS3 Filter Functions
+
+// See: https://developer.mozilla.org/en-US/docs/Web/CSS/filter#filter_functions
+
+The filter property is specified as none or one or more of the functions
+listed below. If the parameter for any function is invalid, the function
+returns none. Except where noted, the functions that take a value expressed
+with a percent sign (as in 34%) also accept the value expressed as decimal
+(as in 0.34).
+
+=== blur()
+
+The blur() function applies a Gaussian blur to the input image. The value
+of radius defines the value of the standard deviation to the Gaussian
+function, or how many pixels on the screen blend into each other, so a
+larger value will create more blur. The initial value for interpolation is 0.
+The parameter is specified as a CSS length, but does not accept percentage
+values.
+
+.Examples
+[source, css]
+----
+filter: blur(5)
+filter: blur(50)
+----
+
+=== brightness()
+
+The brightness() function applies a linear multiplier to the input image,
+making it appear more or less bright. A value of 0% will create an image
+that is completely black. A value of 100% leaves the input unchanged. Other
+values are linear multipliers on the effect. Values of an amount over 100%
+are allowed, providing brighter results. The initial value for interpolation
+is 1.
+
+.Examples
+[source, css]
+----
+filter: brightness(1)
+filter: brightness(0.3)
+----
+
+=== contrast()
+
+The contrast() function adjusts the contrast of the input image. A value
+of 0% will create an image that is completely gray. A value of 100% leaves
+the input unchanged. Values of an amount over 100% are allowed, providing
+results with more contrast. The initial value for interpolation is 1.
+
+.Examples
+[source, css]
+----
+filter: contrast(2)
+----
+
+=== grayscale()
+
+The grayscale() function converts the input image to grayscale. The value
+of amount defines the proportion of the conversion. A value of 100% is
+completely grayscale. A value of 0% leaves the input unchanged. Values
+between 0% and 100% are linear multipliers on the effect. The initial value
+for interpolation is 0.
+
+.Examples
+[source, css]
+----
+filter: grayscale(1)
+filter: grayscale(0.5)
+----
+
+=== hue-rotate()
+
+The hue-rotate() function applies a hue rotation on the input image. The value
+of angle defines the number of degrees around the color circle the input
+samples will be adjusted. A value of 0deg leaves the input unchanged. The initial value for interpolation is 0. Though there is no maximum value; the effect of values above 360deg wraps around.
+
+.Examples
+[source, css]
+----
+filter: hue-rotate(90)
+----
+
+=== invert()
+
+The invert() function inverts the samples in the input image. The value of
+amount defines the proportion of the conversion. A value of 100% is completely
+inverted. A value of 0% leaves the input unchanged. Values between 0% and 100%
+are linear multipliers on the effect. The initial value for interpolation is 0.
+
+.Examples
+[source, css]
+----
+filter: invert(100%)
+filter: invert(1)
+filter: invert(0.6)
+----
+
+=== opacity()
+
+The opacity() function applies transparency to the samples in the input image.
+The value of amount defines the proportion of the conversion. A value of 0%
+is completely transparent. A value of 100% leaves the input unchanged. Values
+between 0% and 100% are linear multipliers on the effect. This is equivalent
+to multiplying the input image samples by amount. The initial value for
+interpolation is 1. This function is similar to the more established opacity
+property; the difference is that with filters, some browsers provide hardware
+acceleration for better performance.
+
+.Examples
+[source, css]
+----
+filter: opacity(1)
+filter: opacity(0.5)
+----
+
+=== saturate()
+
+The saturate() function saturates the input image. The value of amount
+defines the proportion of the conversion. A value of 0% is completely
+un-saturated. A value of 100% leaves the input unchanged. Other values are
+linear multipliers on the effect. Values of amount over 100% are allowed,
+providing super-saturated results. The initial value for interpolation is 1.
+
+[source, css]
+----
+filter: saturate(200%)
+----
+
+.Examples
+=== sepia()
+
+The sepia() function converts the input image to sepia. The value of amount
+defines the proportion of the conversion. A value of 100% is completely sepia.
+A value of 0% leaves the input unchanged. Values between 0% and 100% are
+linear multipliers on the effect. The initial value for interpolation is 0.
+
+[source, css]
+----
+filter: sepia(1)
+filter: sepia(0.5)
+----
+
+=== Combining functions
+
+You may combine any number of functions to manipulate the rendering. The
+following example enhances the contrast and brightness of the image:
+
+.Example
+[source, css]
+----
+filter: grayscale(0.5) sepia(0.5)
+----
+
+/////
+++++
+<script>
+
+window.averta = {},
+function() {
+    function f() {
+        var t, n, i;
+        if ("result"in arguments.callee)
+            return arguments.callee.result;
+        t = /^(Moz|Webkit|Khtml|O|ms|Icab)(?=[A-Z])/,
+        n = document.getElementsByTagName("script")[0];
+        for (i in n.style)
+            if (t.test(i))
+                return arguments.callee.result = i.match(t)[0];
+        return arguments.callee.result = "WebkitOpacity"in n.style ? "Webkit" : "KhtmlOpacity"in n.style ? "Khtml" : ""
+    }
+    function i(n) {
+        var u = document.body || document.documentElement, r = u.style, t = n, i;
+        if (typeof r[t] == "string")
+            return !0;
+        for (v = ["Moz", "Webkit", "Khtml", "O", "ms"],
+        t = t.charAt(0).toUpperCase() + t.substr(1),
+        i = 0; i < v.length; i++)
+            if (typeof r[v[i] + t] == "string")
+                return !0;
+        return !1
+    }
+    function e() {
+        return i("transition")
+    }
+    function r() {
+        return i("transform")
+    }
+    function o() {
+        var n, t, u, i;
+        if (!r())
+            return !1;
+        n = document.createElement("p"),
+        u = {
+            WebkitTransform: "-webkit-transform",
+            OTransform: "-o-transform",
+            MSTransform: "-ms-transform",
+            MozTransform: "-moz-transform",
+            Transform: "transform"
+        },
+        document.body.insertBefore(n, null);
+        for (i in u)
+            n.style[i] !== undefined && (n.style[i] = "translate3d(1px,1px,1px)",
+            t = window.getComputedStyle(n).getPropertyValue(u[i]));
+        return document.body.removeChild(n),
+        t != null && t.length > 0 && t !== "none"
+    }
+    var n, t, u;
+    window.package = function(n) {
+        window[n] || (window[n] = {})
+    }
+    ,
+    n = function(n, t) {
+        for (var i in t)
+            n[i] = t[i]
+    }
+    ,
+    Function.prototype.extend = function(t) {
+        typeof t.prototype.constructor == "function" ? (n(this.prototype, t.prototype),
+        this.prototype.constructor = this) : (this.prototype.extend(t),
+        this.prototype.constructor = this)
+    }
+    ,
+    t = {
+        Moz: "-moz-",
+        Webkit: "-webkit-",
+        Khtml: "-khtml-",
+        O: "-o-",
+        ms: "-ms-",
+        Icab: "-icab-"
+    },
+    $(document).ready(function() {
+        window._jcsspfx = f(),
+        window._csspfx = t[window._jcsspfx],
+        window._cssanim = e(),
+        window._css3d = o(),
+        window._css2d = r(),
+        window._touch = "ontouchstart"in document
+    }),
+    window.parseQueryString = function(n) {
+        var t = {};
+        return n.replace(new RegExp("([^?=&]+)(=([^&]*))?","g"), function(n, i, r, u) {
+            t[i] = u
+        }),
+        t
+    }
+    ,
+    u = 50 / 3,
+    window.requestAnimationFrame || (window.requestAnimationFrame = function() {
+        return window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function(n) {
+            window.setTimeout(n, u)
+        }
+    }()),
+    window.getComputedStyle || (window.getComputedStyle = function(n) {
+        return this.el = n,
+        this.getPropertyValue = function(t) {
+            var i = /(\-([a-z]){1})/g;
+            return t == "float" && (t = "styleFloat"),
+            i.test(t) && (t = t.replace(i, function() {
+                return arguments[2].toUpperCase()
+            })),
+            n.currentStyle[t] ? n.currentStyle[t] : null
+        }
+        ,
+        n.currentStyle
+    }
+    ),
+    $.jqLoadFix = function() {
+        if (this.complete) {
+            var n = this;
+            setTimeout(function() {
+                $(n).load()
+            }, 1)
+        }
+    }
+}(),
+function() {
+    "use strict";
+    var t = null, n;
+    window.CSSTween = function(n, i, r, u) {
+        this.$element = n,
+        this.duration = i || 1e3,
+        this.delay = r || 0,
+        this.ease = u || "linear",
+        t || (t = window._jcsspfx === "O" ? "otransitionend" : window._jcsspfx == "Webkit" ? "webkitTransitionEnd" : "transitionend")
+    }
+    ,
+    n = CSSTween.prototype,
+    n.to = function(n, t) {
+        return this.to_cb = n,
+        this.to_cb_target = t,
+        this
+    }
+    ,
+    n.from = function(n, t) {
+        return this.fr_cb = n,
+        this.fr_cb_target = t,
+        this
+    }
+    ,
+    n.onComplete = function(n, t) {
+        return this.oc_fb = n,
+        this.oc_fb_target = t,
+        this
+    }
+    ,
+    n.chain = function(n) {
+        return this.chained_tween = n,
+        this
+    }
+    ,
+    n.reset = function() {
+        clearTimeout(this.start_to),
+        clearTimeout(this.end_to),
+        this.$element.css(window._jcsspfx + "TransitionDuration", "").css(window._jcsspfx + "TransitionProperty", "").css(window._jcsspfx + "TransitionTimingFunction", "").css(window._jcsspfx + "TransitionDelay", "")
+    }
+    ,
+    n.start = function() {
+        this.fresh = !0,
+        clearTimeout(this.start_to),
+        clearTimeout(this.end_to),
+        this.fr_cb && (this.$element.css(window._jcsspfx + "TransitionDuration", "0ms"),
+        this.fr_cb.call(this.fr_cb_target));
+        var n = this;
+        return this.onTransComplete = function() {
+            n.fresh && (n.reset(),
+            n.fresh = !1,
+            n.chained_tween && n.chained_tween.start(),
+            n.oc_fb && n.oc_fb.call(n.oc_fb_target))
+        }
+        ,
+        this.start_to = setTimeout(function() {
+            n.$element.css(window._jcsspfx + "TransitionDuration", n.duration + "ms").css(window._jcsspfx + "TransitionProperty", "all"),
+            n.delay > 0 ? n.$element.css(window._jcsspfx + "TransitionDelay", n.delay + "ms") : n.$element.css(window._jcsspfx + "TransitionDelay", ""),
+            n.ease != "linear" && n.$element.css(window._jcsspfx + "TransitionTimingFunction", n.ease),
+            n.to_cb && n.to_cb.call(n.to_cb_target)
+        }, 100),
+        this.end_to = setTimeout(function() {
+            n.onTransComplete()
+        }, 100 + this.duration),
+        this
+    }
+}(),
+function() {
+    "use strict";
+    function t(t, i) {
+        var r, u, f;
+        return (i.x !== undefined || i.y !== undefined) && (n ? (r = window._jcsspfx + "Transform",
+        i.x !== undefined && (i[r] = (i[r] || "") + " translateX(" + i.x + "px)",
+        delete i.x),
+        i.y !== undefined && (i[r] = (i[r] || "") + " translateY(" + i.y + "px)",
+        delete i.y)) : (i.x !== undefined && (u = t.css("right") !== "auto" ? "right" : "left",
+        i[u] = i.x + "px",
+        delete i.x),
+        i.y !== undefined && (f = t.css("right") !== "auto" ? "right" : "left",
+        i[f] = i.y + "px",
+        delete i.y))),
+        i
+    }
+    var n = null;
+    window.CTween = {},
+    CTween.setPos = function(n, i) {
+        n.css(t(n, i))
+    }
+    ,
+    CTween.animate = function(i, r, u, f) {
+        var e, o;
+        if (n == null && (n = window._cssanim),
+        f = f || {},
+        t(i, u),
+        n) {
+            if (e = new CSSTween(i,r,f.delay,EaseDic[f.ease]),
+            e.to(function() {
+                i.css(u)
+            }),
+            f.complete)
+                e.onComplete(f.complete, f.target);
+            return e.start(),
+            e.stop = e.reset,
+            e
+        }
+        return f.delay && i.delay(f.delay),
+        f.complete && (o = function() {
+            f.complete.call(f.target)
+        }
+        ),
+        i.stop(!0).animate(u, r, f.ease || "linear", o),
+        i
+    }
+    ,
+    CTween.fadeOut = function(n, t, i) {
+        var r = {};
+        i && (r.complete = function() {
+            n.remove()
+        }
+        ),
+        CTween.animate(n, t || 1e3, {
+            opacity: 0
+        }, r)
+    }
+    ,
+    CTween.fadeIn = function(n, t) {
+        n.css("opacity", 0),
+        CTween.animate(n, t || 1e3, {
+            opacity: 1
+        })
+    }
+}(),
+function() {
+    window.EaseDic = {
+        linear: "linear",
+        ease: "ease",
+        easeIn: "ease-in",
+        easeOut: "ease-out",
+        easeInOut: "ease-in-out",
+        easeInCubic: "cubic-bezier(.55,.055,.675,.19)",
+        easeOutCubic: "cubic-bezier(.215,.61,.355,1)",
+        easeInOutCubic: "cubic-bezier(.645,.045,.355,1)",
+        easeInCirc: "cubic-bezier(.6,.04,.98,.335)",
+        easeOutCirc: "cubic-bezier(.075,.82,.165,1)",
+        easeInOutCirc: "cubic-bezier(.785,.135,.15,.86)",
+        easeInExpo: "cubic-bezier(.95,.05,.795,.035)",
+        easeOutExpo: "cubic-bezier(.19,1,.22,1)",
+        easeInOutExpo: "cubic-bezier(1,0,0,1)",
+        easeInQuad: "cubic-bezier(.55,.085,.68,.53)",
+        easeOutQuad: "cubic-bezier(.25,.46,.45,.94)",
+        easeInOutQuad: "cubic-bezier(.455,.03,.515,.955)",
+        easeInQuart: "cubic-bezier(.895,.03,.685,.22)",
+        easeOutQuart: "cubic-bezier(.165,.84,.44,1)",
+        easeInOutQuart: "cubic-bezier(.77,0,.175,1)",
+        easeInQuint: "cubic-bezier(.755,.05,.855,.06)",
+        easeOutQuint: "cubic-bezier(.23,1,.32,1)",
+        easeInOutQuint: "cubic-bezier(.86,0,.07,1)",
+        easeInSine: "cubic-bezier(.47,0,.745,.715)",
+        easeOutSine: "cubic-bezier(.39,.575,.565,1)",
+        easeInOutSine: "cubic-bezier(.445,.05,.55,.95)",
+        easeInBack: "cubic-bezier(.6,-.28,.735,.045)",
+        easeOutBack: "cubic-bezier(.175, .885,.32,1.275)",
+        easeInOutBack: "cubic-bezier(.68,-.55,.265,1.55)"
+    }
+}()
+</script>
+++++
+/////
+
+/////
+++++
+<script>
+
+$(document).ready(function() {
+
+	// SyntaxHighlighter.all();
+
+	CTween.fadeOut($('#loading') , 400 , true);
+	CTween.fadeIn($('#main-container').css('display' , 'block') , 400);
+
+	$(".easedemo").each(function(index){
+				var $this = $(this);
+				var tween;
+				var pbtn = $('<div class="playbtn"></div>').appendTo($this).click(function(){
+					if(tween) tween.reset();
+					box.css('left' , 0);
+					tween = CTween.animate(box , 1800 , {left:440} , {ease:$this.data('ease')});
+				});
+				var box = $('<div class="easebox"></div>').appendTo($this);
+			});
+
+	// init pages
+
+	var pages = $('.content-section');
+	var content = $('#content').addClass('float');
+	pages.css('display','none').addClass('float');
+
+	var currentPage;
+
+	function updatePage(){
+		var hash = window.location.hash;
+		if(hash === '' || hash === undefined) hash = '#intro';
+		var page = $(hash);
+		showPage(page);
+		if(currentPage)	hidePage(currentPage);
+		currentPage = page;
+		content.scrollTop(0);
+	}
+
+	var hide_tween ;
+
+	var showPage =  function(page){
+		$('a[href=#'+page.attr('id')+']').parent().addClass('active');
+
+		page.css({opacity:0 , display:'' , position:'relative' , top:'0px' , left:'0px'});
+		CTween.setPos(page,{x:500});
+		CTween.animate(page , 500 , {opacity:'1' , x:0} , {ease:'easeOutQuart'});
+
+		if(hide_tween && ((hide_tween.$element && hide_tween.$element[0] === page[0]) || (hide_tween[0] === page[0]))){
+			hide_tween.stop(true);
+		}
+
+	};
+
+	var hidePage = function(page){
+		$('a[href=#'+page.attr('id')+']').parent().removeClass('active');
+		page.css({position:'absolute'});
+		var to = {opacity:'0' , x : 500};
+		hide_tween = CTween.animate(page , 500 , to , {ease:'easeOutQuart', complete:function(){
+			page.css('display' , 'none');
+		}});
+	};
+
+
+	$(window).on('hashchange' , updatePage);
+	updatePage();
+
+	$(window).on('resize' , onresize);
+
+	function onresize(){
+		content.height($(window).height() - $('.header').height() - parseInt($('#content').css('padding-top'))*2 - 1);
+	}
+	onresize();
+
+
+	var sidebar = $('#sidebar'),
+		side_w	= $('.toc').outerWidth(),
+		show	= true,
+		togg	= $('.toggle'),
+		base_marg = parseInt(content.css('margin-left'));
+
+	togg.on('click',function(){
+		togg.toggleClass('out');
+		if(show){
+			show = false;
+			CTween.animate(sidebar , 500 , {left:-side_w+'px'} , {ease:'easeOutQuart'});
+			CTween.animate(content , 500 , {marginLeft:base_marg-side_w} , {ease:'easeOutQuart'});
+		}else{
+			show = true;
+			CTween.animate(sidebar , 500 , {left:'0px'} , {ease:'easeOutQuart'});
+			CTween.animate(content , 500 , {marginLeft:base_marg} , {ease:'easeOutQuart'});
+		}
+
+	});
+
+});
+
+</script>
+++++
+/////
+
+/////
+++++
+<style>
+
+.easedemo {
+  width: 500px;
+  height: 30px;
+  border: solid 1px rgb(213, 213, 213);
+  background: white;
+}
+
+</style>
+++++
+/////

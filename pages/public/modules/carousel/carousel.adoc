@@ -1,0 +1,96 @@
+---
+title:                                  Carousel
+title_extention:                        Integrated Carousel Module for J1 Template
+tagline:                                User Guide for J1 Template
+
+date:                                   2022-08-14
+#last_modified:                         2023-01-01
+
+description: >
+                                        J1 Template has fully integrated Owl Carousel. For the
+                                        typical usage of a slideshow no manual setup like
+                                        Javascript initialization and no HTML code is needed.
+                                        J1 Carousel instances are created automatically based
+                                        on a single configuration file.
+
+keywords: >
+                                        Jekyll, JekyllOne, Theme, User Guide, Module, Carousel,
+                                        Slideshow, Manual
+
+categories:                             [ Manual, Module ]
+tags:                                   [ Carousel ]
+
+image:
+  path:                                 /assets/images/modules/attics/1920x1280/sally-k.jpg
+  width:                                1920
+  height:                               1280
+
+tts:                                    true
+comments:                               false
+exclude_from_search:                    false
+regenerate:                             false
+permalink:                              /pages/public/manuals/modules/carousel/
+
+resources:                              [
+                                          animate, clipboard, carousel,
+                                          justifiedGallery, lightbox, lightGallery,
+                                          rouge
+                                        ]
+
+resource_options:
+  - attic:
+      slides:
+        - url:                          /assets/images/modules/attics/1920x1280/sally-k.jpg
+          alt:                          Photo by Sally K on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Photo by Sally K on Unsplash
+            href:                       https://unsplash.com/@salivan_91
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:ms-slider-module--documentation:       /pages/public/manuals/modules/masterslider/
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="all" %}
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+The J1 Carousel Module is based on _OWL Carousel V1_ in the latest version.
+_OWL Carousel_ is a powerful _jQuery_ plugin for creating fully responsive
+and touch-enabled carousels and simple slideshows.
+
+[role="mb-4"]
+_OWL Carousel_ V1 is used for J1 Theme as the default carousel solution. If
+you have plans to extend the current functionality of the *Carousel Module*,
+check section <<Owl Carousel API>> for technical details.
+
+[TIP]
+====
+When more functionality is needed that cannot offered by a the default carousel
+module, for example a slide show, you should go for
+link:{ms-slider-module--documentation}[Masterslider, {browser-window--new}]
+available with J1 Theme as well.
+====
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+
+include::{documentdir}/owlcarousel_integration.asciidoc[]
+
+include::{documentdir}/owlcarousel_examples.asciidoc[]
+
+include::{documentdir}/owlcarousel_library.asciidoc[]

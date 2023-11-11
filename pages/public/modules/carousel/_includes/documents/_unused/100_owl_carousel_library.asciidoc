@@ -1,0 +1,403 @@
+
+== Library Features
+
+=== Initialization
+
+The initialization of Owl Carousel is done by a *4-step-sequence*: Loading the
+CSS (1) and JS code (2) portions, placing the HTML code of the carousel (3)
+followed by a final setup phase to make Owl Carousel instances ready to use (4).
+
+==== CSS load
+
+The first step of initialization is to load the CSS data. Beside the base
+CSS styles provided by `owl.carousel.css`, the CSS transition definitions
+`owl.transitions.css` are to be loaded.
+
+[start=1]
+. Load CSS files with the `<HEAD>` section:
+
+.Include the CSS
+[source, html]
+----
+<link rel="stylesheet" href="path_to_css/owl.carousel.css" />
+<link rel="stylesheet" href="path_to_css/owl.transitions.css" />
+----
+
+==== JS load
+
+The second phase covers the load of the Javascript portion. Owl Carousel uses
+a single library file `owl.carousel.js` or `owl.carousel.min.js` for the
+minified version.
+
+[start=2]
+. The Javascript portion of Owl Carousel should be included at the bottom
+  of a page, before the closing `</HTML>` tag:
+
+.Include the Javascript
+[source, html]
+----
+<script src="path_to_js/owl.carousel.min.js"></script>
+----
+
+==== HTML Markup
+
+Owl Carousel doesn't use any special markup. The carousel works with any type
+of *HTML block elements*. The carousel data (content) needs to be wrapped
+inside the container element like this:
+
+[source, html]
+----
+<div id="owl_carousel_id" class="owl-carousel">
+----
+
+NOTE: The class `owl-carousel` is mandatory to apply proper styles that
+      comes from `owl.carousel.css` CSS file.
+
+[start=3]
+. The HTML code of Owl Carousel including the content can be put anywhere
+within the `<BODY>`section.
+
+.Setup the HTML code of an Owl Carousel
+[source, html]
+----
+<div id="owl" class="owl-carousel">
+  <div> Your Content </div>
+  ...
+  ...
+  <div> Your Content </div>
+</div>
+----
+
+==== JS initialization
+
+To make the carousel ready to use, the Owl Carousel instances are to be
+initialised using the options needed for your type and behaviour of
+Owl Carousel.
+
+[start=4]
+. Finally, Owl Carousel library is being initialized on the
+ `document-ready` event for all carousel instances defined with
+  the content.
+
+.Initialize the Javascript portion of Owl Carousel
+[source, html]
+----
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#owl").owlCarousel({
+      // Most important Owl Carousel features
+      items:              5,
+      itemsCustom:        false,
+      itemsDesktop:       [1199,4],
+      itemsDesktopSmall:  [980,3],
+      itemsTablet:        [768,2],
+      itemsTabletSmall:   false,
+      itemsMobile:        [479,1],
+      singleItem:         false,
+      itemsScaleUp:       false
+    });
+  });
+</script>
+----
+
+=== Options
+
+Owl Carousel offers a large number of options to make the look and feel and
+the behaviour of your slide shows in a wide range customisable. All options
+can be used as static parameters at setup time or dynamically used by
+`data methods` (see chapter <<data-methos,Data methods>> for more details).
+
+[cols="2a,^2a,^2a,^6a", options="header", width="100%", role="rtable mt-3"]
+|===
+|Variable |Default |Type |Description
+
+|items |5 |int |This variable allows you to set the maximum amount of
+items displayed at a time with the widest browser width
+
+|itemsDesktop |[1199,4] |array |This allows you to preset the number of
+slides visible with a particular browser width. The format is [x,y]
+whereby x=browser width and y=number of slides displayed. For example
+[1199,4] means that if(window<=1199)\{ show 4 slides per page}
+Alternatively use `itemsDesktop: false` to override these settings.
+
+|itemsDesktopSmall |[979,3] |array |As above.
+
+|itemsTablet |[768,2] |array |As above.
+
+|itemsTabletSmall |false |array |As above. Default value is disabled.
+
+|itemsMobile |[479,1] |array |As above
+
+|itemsCustom |false |array |This allow you to add custom variations of
+items depending from the width If this option is set, itemsDeskop,
+itemsDesktopSmall, itemsTablet, itemsMobile etc. are disabled For better
+preview, order the arrays by screen size, but it's not mandatory Don't
+forget to include the lowest available screen size, otherwise it will
+take the default one for screens lower than lowest available. +
+Example: +
+ [[0, 2], [400, 4], [700, 6], [1000, 8], [1200, 10], [1600, 16]] +
+ For more information about structure of the internal arrays see
+itemsDesktop.
+
+|singleItem |false |boolean |Display only one item.
+
+|itemsScaleUp |false |boolean |Option to not stretch items when it is
+less than the supplied items.
+
+|slideSpeed |200 |int |Slide speed in milliseconds
+
+|paginationSpeed |800 |int |Pagination speed in milliseconds
+
+|rewindSpeed |1000 |int |Rewind speed in milliseconds
+
+|autoPlay |false |int/boolean |Change to any integrer for example
+`autoPlay : 5000` to play every 5 seconds. If you set `autoPlay: true`
+default speed will be 5 seconds.
+
+|stopOnHover |false |boolean |Stop autoplay on mouse hover
+
+|navigation |false |boolean |Display "next" and "prev" buttons.
+
+|navigationText |["prev","next"] |array |You can cusomize your own text
+for navigation. To get empty buttons use `navigationText : false`. Also
+HTML can be used here
+
+|rewindNav |true |boolean |Slide to first item. Use `rewindSpeed` to
+change animation speed.
+
+|scrollPerPage |false |boolean |Scroll per page not per item. This
+affect next/prev buttons and mouse/touch dragging.
+
+|pagination |true |boolean |Show pagination.
+
+|paginationNumbers |false |boolean |Show numbers inside pagination
+buttons
+
+|responsive |true |boolean |You can use Owl Carousel on desktop-only
+websites too! Just change that to "false" to disable resposive
+capabilities
+
+|responsiveRefreshRate |200 |int |Check window width changes every 200ms
+for responsive actions
+
+|responsiveBaseWidth |window |jQuery selector |Owl Carousel check window
+for browser width changes. You can use any other jQuery element to check
+width changes for example ".owl-demo". Owl will change only if
+".owl-demo" get new width.
+
+|baseClass |"owl-carousel" |string |Automaticly added class for base CSS
+styles. Best not to change it if you don't need to.
+
+|theme |"owl-theme" |string |Default Owl CSS styles for navigation and
+buttons. Change it to match your own theme
+
+|lazyLoad |false |boolean |Delays loading of images. Images outside of
+viewport won't be loaded before user scrolls to them. Great for mobile
+devices to speed up page loadings. IMG need special markup
+`class="lazyOwl"` and `data-src="your img path"`.
+See an example with chapter <<data-attributes,Data attributes>>.
+
+|lazyFollow |true |boolean |When pagination used, it skips loading the
+images from pages that got skipped. It only loads the images that get
+displayed in viewport. If set to false, all images get loaded when
+pagination used. It is a sub setting of the lazy load function.
+
+|lazyEffect |"fade" |boolean / string |Default is fadeIn on 400ms speed.
+Use false to remove that effect.
+
+|autoHeight |false |boolean |Add height to owl-wrapper-outer so you can
+use different heights on slides. Use it only for one item per page
+setting.
+
+|jsonPath |false |string |Allows you to load directly from a jSon file.
+The JSON structure you use needs to match the owl JSON structure used
+here. To use custom JSON structure see jsonSuccess option.
+
+|jsonSuccess |false |function |Success callback for $.getJSON build in
+into carousel.
+
+|dragBeforeAnimFinish |true |boolean |Ignore whether a transition is
+done or not (only dragging).
+
+|mouseDrag |true |boolean |Turn off/on mouse events.
+
+|touchDrag |true |boolean |Turn off/on touch events.
+
+|addClassActive |false |boolean |Add "active" classes on visible items.
+Works with any numbers of items on screen.
+
+|transitionStyle |false |string |Add CSS3 transition style. Works only
+with one item on screen. Values: `fade`, `fadeUp`, `backSlide` and `goDown`|
+|===
+
+/////
+==== Transition styles
+
+For Owl Carousel, all transition styles are defined with `owl.transitions.css`.
+Use  *option* `transitionStyle` to set the type of a transition for your slides.
+
+There are four *predefined* transition styles available out of the box:
+
+[cols="2a,10a", options="header", width="100%", role="rtable mt-3"]
+|===
+|Style |Description
+
+| fade
+| description
+
+| fadeUp
+| description
+
+| backSlide
+| description
+
+| goDown
+| description
+
+|===
+
+NOTE: CSS3 transition will work only with browsers that support `CSS3`
+(translate3d methods) and only with sliders configured for *single items*.
+
+You can also build your own transition styles quite easy. For example by adding
+"YourTransition" value transitionStyle: "YourTransition", owlCarousel will
+add `.owl-YourTransition-out` class to previous slide and `.owl-YourTransition-in`
+to next slide. All transitions require both *in* and *out* styles. Have a
+look into `owl.transitions.css` source for details.
+
+[source, css]
+----
+/* fade */
+.owl-fade-out {
+  z-index: 10;
+  -webkit-animation: fadeOut .7s both ease;
+  -moz-animation: fadeOut .7s both ease;
+  animation: fadeOut .7s both ease;
+}
+.owl-fade-in {
+  -webkit-animation: fadeIn .7s both ease;
+  -moz-animation: fadeIn .7s both ease;
+  animation: fadeIn .7s both ease;
+}
+----
+
+[NOTE]
+====
+An excellent source for CSS3 transition examples can be found with *Animate CSS*
+written by *Daniel Eden* . Animate CSS is fully integrated with J1 Theme
+offering all available CSS3 *webkit* styles by loading a single CSS file. You
+find that CSS file under the asset tree:
+`/assets/themes/j1/animate/css/animate.css`.
+
+A live demo of available transitions is available with *Daniels* home page of
+https://daneden.github.io/animate.css/[Animate.css, window="_blank"].
+====
+/////
+
+=== Callbacks
+
+To customize the behaviour of your slide shows, several callback functions
+are available with Owl Carousel. See with the following table all events
+that can be bound to custom functions.
+
+[cols="2a,2a,2a,6a", options="header", width="100%", role="rtable mt-3"]
+|===
+|Variable |Default |Type |Description
+
+|beforeUpdate |false |function |Before responsive update callback
+|afterUpdate |false |function |After responsive update callback
+|beforeInit |false |function |Before initialization callback
+|afterInit |false |function |After initialization callback
+|beforeMove |false |function |Before move callback
+|afterMove |false |function |After move callback
+|afterAction |false |function |After startup, move and update callback
+|startDragging |false |function |Call this function while dragging.
+|afterLazyLoad |false |function |Call this function after lazyLoad.
+
+|===
+
+=== Methods
+
+For existing carousel instances, several methods are available to modify the
+slider or add additional options to the show. To use Owl Carousel with dynamic
+`data methods` at runtime, an instance object (variable) is needed.
+
+Go for the following sequence:
+
+. Define a global instance variable
+. Initialize the Carousel Plugin
+. Load the instance data using jQuery `$.data` function
+. Modify some data (options) as needed
+
+.JS code example for using `data methods` at runtime
+[source, html]
+----
+<script type="text/javascript">
+  // Define a (global) instance variable
+  // outside document-ready
+  var owl;
+  $(document).ready(function() {
+    // Initialize the Carousel Plugin
+    $(".owl-carousel").owlCarousel()
+  });
+  // Get carousel data and store the object data
+  // in an instance variable (owl)
+  var owl = $(".owl-carousel").data('owlCarousel');
+  // Modify some data (options)
+  owl.reinit({
+    navigation: true,
+    items:      2
+  });
+</script>
+----
+
+Find withe following table all `data methods` available for J1 Owl carousel
+instances.
+
+[cols="4a,2a,6a", options="header", width="100%", role="rtable mt-3"]
+|===
+|Method |Option |Description
+
+| reinit(newOptions)
+| JSON string
+| Reloads an existing carousel instance with new or additional parameters.
+  Parameters are given as a JSON object: `{option:value, .. ,option:value}`
+
+| destroy()
+| none
+| Destroy an existing carousel
+
+| addItem(htmlString [,targetPosition])
+| string, [integer]
+| Adds an additional image to the show. Parameter `htmlString` contains the
+  HTML markup, `targetPosition` the position, the new item should be added to.
+
+| removeItem(targetPosition)
+| integer
+| Removes an image (item) from the show at the specified `targetPosition`
+
+| next()
+| none
+| Go to next slide
+
+| prev()
+| none
+| Go to previous slide
+
+| goTo(n)
+| integer
+| Go to slide `n` and  *use* slide animation
+
+| jumpTo(n)
+| integer
+| Go to slide `n` *without* slide animation
+
+| play([speed])
+| integer
+| Start auto playing the show. Accept `speed` as an optional parameter.
+
+| stop()
+| none
+| Stop auto playing the show
+
+|===
