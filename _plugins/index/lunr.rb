@@ -73,6 +73,8 @@ module Jekyll
           @project_path = File.join(@gem_path.chomp, @module_dir)
         end
 
+        # set NodeJS for JS runtime explicitely
+        ExecJS.runtime = ExecJS::Runtimes::Node
         @lunr_path = File.join(@project_path, 'lunr.min.js')
         raise "Could not find #{@lunr_path}" unless File.exist?(@lunr_path)
 
